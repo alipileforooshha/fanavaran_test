@@ -20,7 +20,7 @@ const Header = () => {
     }
 
   return (
-    <Navbar expand="lg" className='bg-success'>
+      <Navbar expand="lg" className='bg-success'>
         <Container fluid  className='justify-contents-start'>
             <Navbar.Toggle aria-controls='navbar-dark-example' className='' />
             <Col>

@@ -62,12 +62,6 @@ const FormSection = () => {
         {
             returnForm()
         }
-        {/* {
-            showNextButton()
-        }
-        {
-            showPreviousButton()
-        } */}
     </div>
   )
 }

@@ -1,12 +1,15 @@
 import './App.css';
-import FormSection from './Components/FormSection';
+import FormContainer from './Components/FormContainer';
 import Header from './Components/Header';
 
+
 function App() {
+  
+  
   return (
     <div className="App">
-      <Header/>
-      <FormSection />
+      <h3>hello</h3>
+      <FormContainer />
     </div>
   );
 }
