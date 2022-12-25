@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import BirthData from './FirstPageForms/BirthData';
 import FirstYearPayment from './FirstPageForms/FirstYearPayment';
 import InsuranceLength from './FirstPageForms/InsuranceLength';
 import JobForm from './FirstPageForms/JobForm';
 import PaymentMethod from './FirstPageForms/PaymentMethod';
 import RelativeForm from './FirstPageForms/RelativeForm';
+import { FormContext } from '../Contexts/FormContext';
 
 const FormContainer = () => {
+    
     const[state,setState] = useState({
         step : 1,
         relativity : 'test',
@@ -19,50 +21,53 @@ const FormContainer = () => {
         payment_method : '',
         first_payment : '',
     });
-    // setState({
-    //     relativity: "changed"
-    // });
-    // console.log(state)
-    const {relativity, first_job, second_job, birth_day, birth_month, birth_year, insurance_length, payment_method, first_payment} = state;
-
-    const values = {relativity, first_job, second_job, birth_day, birth_month, birth_year, insurance_length, payment_method, first_payment};
-    // console.log(values);
-    const prevStep = () => {
-        setState({step : state.step - 1});
+    function next() {
+        return <button className='btn btn-primary mt-3' onClick={() => {
+            setState({
+              ...state,
+              step : state.step + 1
+            });
+            }}>بعدی</button>;
     }
 
-    const nextStep = () => {
-        setState({step : state.step + 1});
+    function prev() {
+        return <button className='btn btn-primary mt-3' onClick={() => {
+            setState({
+              ...state,
+              step : state.step - 1
+            });
+            }}>قبلی</button>;
     }
-
-    const handleChange = input => e => {
-        e.preventDefault();
-        console.log(e.target.value);
-        console.log(input);
-        console.log(setState({ [input] : e.target.value}));
-        return;
-        // console.log(state.relativity);
-    }
-
+    
     function returnForm(){
-        if(state.step === 1)
-            return <RelativeForm next={nextStep} handleChange={handleChange} values = {values} name={"ali"}/>
-        if(state.step === 2)
-            return <JobForm next={nextStep} previous={prevStep} handleChange={handleChange} values = {values}/>
-        if(state.step === 3)
-            return <BirthData next={nextStep} previous={prevStep} handleChange={handleChange} values = {values}/>
-        if(state.step === 4)
-            return <InsuranceLength next={nextStep} previous={prevStep} handleChange={handleChange} values = {values}/>
-        if(state.step === 5)
-            return <PaymentMethod next={nextStep} previous={prevStep} handleChange={handleChange} values = {values}/>
-        if(state.step === 6)
-            return <FirstYearPayment previous={prevStep} handleChange={handleChange} values = {values}/>
+        if(state.step == 1)
+            return <RelativeForm next={next}/>
+        if(state.step == 2)
+            return <JobForm next={next} prev={prev}/>
+        if(state.step == 3)
+            return <BirthData next={next} prev={prev}/>
+        if(state.step == 4)
+            return <InsuranceLength next={next} prev={prev}/>
+        if(state.step == 5)
+            return <PaymentMethod next={next} prev={prev}/>
+        if(state.step == 6)
+            return <FirstYearPayment prev={prev}/>
     }
 
     return (
-    <div>
-        {returnForm()}
-    </div>
+        <FormContext.Provider value = {{state,setState}}>
+            {
+                returnForm()
+            }
+            <h2>{state.relativity}</h2>
+            <h2>{state.first_job}</h2>
+            <h2>{state.birth_day}</h2>
+            <h2>{state.birth_month}</h2>
+            <h2>{state.birth_year}</h2>
+            <h2>{state.insurance_length}</h2>
+            <h2>{state.payment_method}</h2>
+            <h2>{state.first_payment}</h2>
+        </FormContext.Provider>
   )
 }
 

@@ -1,18 +1,24 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { FormContext } from '../../Contexts/FormContext';
+import { useForm } from 'react-hook-form';
 
-const RelativeForm = ({next, handleChange, values, name}) => {
+const RelativeForm = ({next}) => {
+
+  const {state,setState} = useContext(FormContext);
   
-  function relativechange(event){
-    console.log(event.target.name);
-    console.log(event.target.value);
-    // this.handleChange(event['name'] = 'ali');
-    handleChange();
-  } 
   return (
-    <form className='form-group m-4'>
-        {name}
-        <label>نسبت با بیمه شونده
-          <select className='text-dark form-control form-select' name='relativity' defaultValue={values.relativity} onChange={handleChange("relativity")}>
+    <form className='form-group m-4 d-flex flex-column w-50 m-auto'>
+        <label>نسبت با بیمه شونده</label>
+          <select className='text-dark form-control form-select' name='relativity' onChange={
+              (event) => {
+                console.log(event.target.value);
+                // event.preventDefault();
+                event.stopPropagation();
+                setState({
+                  ...state,
+                  relativity : event.target.value});
+              }
+            }>
               <option className='text-danger' value={1}>خودم</option>
               <option className='text-dark' value={2}>همسر</option>
               <option className='text-dark' value={3}>فرزند</option>
@@ -23,8 +29,7 @@ const RelativeForm = ({next, handleChange, values, name}) => {
               <option className='text-dark' value={8}>پدربزرگ</option>
               <option className='text-dark' value={9}>مادربزرگ</option>
           </select>
-        </label>
-        <button className='btn btn-primary mt-3'>بعدی</button>
+        {next()}
     </form>
   )
 }
