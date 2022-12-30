@@ -7,7 +7,7 @@ const RelativeForm = ({next}) => {
   const {state,setState} = useContext(FormContext);
   
   return (
-    <form className='form-group m-4 d-flex flex-column w-50 m-auto'>
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
         <label>نسبت با بیمه شونده</label>
           <select className='text-dark form-control form-select' name='relativity' onChange={
               (event) => {
@@ -30,7 +30,7 @@ const RelativeForm = ({next}) => {
               <option className='text-dark' value={9}>مادربزرگ</option>
           </select>
         {next()}
-    </form>
+    </div>
   )
 }
 

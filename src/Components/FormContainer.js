@@ -40,17 +40,17 @@ const FormContainer = () => {
     }
     
     function returnForm(){
-        if(state.step == 1)
+        if(state.step === 1)
             return <RelativeForm next={next}/>
-        if(state.step == 2)
+        if(state.step === 2)
             return <JobForm next={next} prev={prev}/>
-        if(state.step == 3)
+        if(state.step === 3)
             return <BirthData next={next} prev={prev}/>
-        if(state.step == 4)
+        if(state.step === 4)
             return <InsuranceLength next={next} prev={prev}/>
-        if(state.step == 5)
+        if(state.step === 5)
             return <PaymentMethod next={next} prev={prev}/>
-        if(state.step == 6)
+        if(state.step === 6)
             return <FirstYearPayment prev={prev}/>
     }
 

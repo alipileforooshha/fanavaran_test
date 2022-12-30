@@ -4,7 +4,7 @@ import { FormContext } from '../../Contexts/FormContext';
 const PaymentMethod = ({next, prev}) => {
   const {state, setState} = useContext(FormContext)
   return (
-    <form className='form-group m-4 d-flex flex-column w-50 m-auto'>
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
         <select className='form-control form-select' onChange={(e) => {
             setState({
               ...state,
@@ -19,7 +19,7 @@ const PaymentMethod = ({next, prev}) => {
         </select>
         {next()}
         {prev()}
-    </form>
+    </div>
   )
 }
 

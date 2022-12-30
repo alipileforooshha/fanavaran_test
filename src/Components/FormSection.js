@@ -18,7 +18,6 @@ const FormSection = () => {
     }
 
     const nextState = (event) => {
-        // console.log(2222);
         event.preventDefault();
         setState({
             count : state.count + 1,
@@ -33,24 +32,22 @@ const FormSection = () => {
     }
 
     function showPreviousButton(){
-        // if(state.count > 1)
-            return <button type='button' className='btn border border-dark mx-2' onClick={previousState}>قبلی</button>
+        return <button type='button' className='btn border border-dark mx-2' onClick={previousState}>قبلی</button>
     }
 
     function showNextButton(data = null){
-        console.log(data);
-            return <button type="submit" className='btn border border-dark mx-2' onClick={nextState}>بعدی</button>
+        return <button type="submit" className='btn border border-dark mx-2' onClick={nextState}>بعدی</button>
     }
 
     function returnForm(){
         if(state.count == 1)
-            return <RelativeForm next={showNextButton}/>
+            return <RelativeForm next={showNextButton} />
         if(state.count == 2)
-            return <JobForm next={showNextButton} previous={showPreviousButton}/>
+            return <JobForm next={showNextButton} previous={showPreviousButton} />
         if(state.count == 3)
-            return <BirthData next={showNextButton} previous={showPreviousButton} datapasser = {callBackFunction}/>
+            return <BirthData/>
         if(state.count == 4)
-            return <InsuranceLength next={showNextButton} previous={showPreviousButton} childAge = {state.childAge}/>
+            return <InsuranceLength next={showNextButton} previous={showPreviousButton} />
         if(state.count == 5)
             return <PaymentMethod next={showNextButton} previous={showPreviousButton} />
         if(state.count == 6)

@@ -4,7 +4,7 @@ import { FormContext } from '../../Contexts/FormContext';
 const FirstYearPayment = ({prev}) => {
   const {state, setState} = useContext(FormContext)
   return (
-    <form className='form-group m-4 d-flex flex-column w-50 m-auto' >
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto' >
         <label>مبلغ پرداختی سال اول</label>
         <input className='form-control' onChange={(e) => {
             setState({
@@ -14,7 +14,7 @@ const FirstYearPayment = ({prev}) => {
             console.log(state);
           }}></input>
         {prev()}
-    </form>
+    </div>
     )
 }
 

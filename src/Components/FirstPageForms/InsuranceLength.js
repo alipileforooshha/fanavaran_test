@@ -4,7 +4,7 @@ import {FormContext} from '../../Contexts/FormContext'
 const InsuranceLength = ({next, prev}) => {
     const {state,setState} = useContext(FormContext);
     return (
-    <form className='form-group m-4 d-flex flex-column w-50 m-auto'>
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
         
         {/* {data.data} */}
         <label>مدت بیمه نامه</label>
@@ -24,7 +24,7 @@ const InsuranceLength = ({next, prev}) => {
         </select>
         {next()}
         {prev()}
-    </form>
+    </div>
   )
 }
 

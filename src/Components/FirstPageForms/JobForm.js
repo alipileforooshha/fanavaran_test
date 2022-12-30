@@ -18,7 +18,7 @@ const JobForm = ({next, prev}) => {
     return <h2>Loading</h2>
   if(loading)  
     return (
-      <form className='form-group m-4 d-flex flex-column w-50 m-auto'>
+      <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
           <label>استعلام بیمه عمر اندوخته دار امید</label>
           <select className='form-control form-select' placeholder='شغل اول' onChange={(e) => {
             setState({
@@ -38,7 +38,7 @@ const JobForm = ({next, prev}) => {
           }}></input>
           {next()}
           {prev()}
-      </form>
+      </div>
     )
 }
 
