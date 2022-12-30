@@ -3,11 +3,14 @@ import {FormContext} from '../../Contexts/FormContext'
 
 const InsuranceLength = ({next, prev}) => {
     const {state,setState} = useContext(FormContext);
+    const end = 70 - state.age>30 ? 30 : 70 - state.age;
+    const length = [...Array(end - 5 + 1).keys()].map(x => x + 5);
+    console.log('state age is',state.age);
+
     return (
     <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
-        
-        {/* {data.data} */}
         <label>مدت بیمه نامه</label>
+        <label>{state.age ? state.age : 10}</label>
         <select className='form-control form-select' onChange={(e) => {
             setState({
               ...state,
@@ -15,12 +18,9 @@ const InsuranceLength = ({next, prev}) => {
             });
             console.log(state);
           }}>
-            <option className='form-control'>1</option>
-            <option className='form-control'>2</option>
-            <option className='form-control'>3</option>
-            <option className='form-control'>4</option>
-            <option className='form-control'>5</option>
-            <option className='form-control'>6</option>
+            {length.map((value, index) => {
+                    return <option key={index} className='form-control'>{value}</option>
+                })}
         </select>
         {next()}
         {prev()}

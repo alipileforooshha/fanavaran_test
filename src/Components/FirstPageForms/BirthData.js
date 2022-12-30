@@ -3,25 +3,17 @@ import { FormContext } from '../../Contexts/FormContext';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
-const BirthData = ({next, prev}) => {
+const BirthData = () => {
     const date = new DateObject({ calendar: persian, locale: persian_fa })
     const {state,setState} = useContext(FormContext);
     const checkAge = () => {
-        let age = date.year - state.birth_year;
+        var func_age = date.year - state.birth_year;
         if(date.month.number < state.birth_month){
-            age = age - 1;
+            func_age = func_age - 1;
         }else if(date.month.number == state.birth_month && date.day < state.birth_day){
-            age = age - 1;
+            func_age = func_age - 1;
         }
-        setState({
-            ...state,
-            age : age
-        });
-        if(age < 18 && state.relativity == 1){
-            return 0
-        }else{
-            return 1;
-        }
+        return func_age;
     }
     const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,
         22,23,24,25,26,27,28,29,30];
@@ -65,23 +57,27 @@ const BirthData = ({next, prev}) => {
                     return <option key={index} className='form-control'>{value}</option>;
                 })}
             </select>
-            <button type='button' className='btn border border-dark mx-2' onClick={(e) => {
+            
+            <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
+                let age = checkAge();
+                if(1){
+                    setState({
+                        ...state,
+                        step : state.step + 1,
+                        age : age
+                    });
+                }else{
+                    console.log('age not reached');
+                }
+            }}>بعدی</button>
+            
+            <button type='button' className='btn btn-primary my-2' onClick={(e) => {
 
                 setState({
                     ...state,
                     step : state.step - 1
                 });
             }}>قبلی</button>
-            <button type="submit" className='btn border border-dark mx-2' onClick={(e) => {
-                if(checkAge()){
-                    setState({
-                        ...state,
-                        step : state.step + 1
-                    });
-                }else{
-                    console.log('age not reached');
-                }
-            }}>بعدی</button>
 
     </div>
   )

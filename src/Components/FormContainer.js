@@ -17,6 +17,7 @@ const FormContainer = () => {
         birth_day : '',
         birth_month : '',
         birth_year : '',
+        age : 2,
         insurance_length : '',
         payment_method : '',
         first_payment : '',
@@ -67,6 +68,7 @@ const FormContainer = () => {
             <h2>{state.insurance_length}</h2>
             <h2>{state.payment_method}</h2>
             <h2>{state.first_payment}</h2>
+            <h2>{state.age}</h2>
         </FormContext.Provider>
   )
 }
