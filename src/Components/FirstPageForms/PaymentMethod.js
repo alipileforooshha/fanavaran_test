@@ -12,10 +12,10 @@ const PaymentMethod = ({next, prev}) => {
             });
             console.log(state);
           }}>
-            <option className='form-control'>یک قسط یک ساله</option>
-            <option className='form-control'>دو قسط شش ماهه</option>
-            <option className='form-control'>4 قسط سه ماهه</option>
-            <option className='form-control'>12 قسط ماهانه</option>
+            <option className='form-control' value={0}>یک قسط یک ساله</option>
+            <option className='form-control' value={1}>دو قسط شش ماهه</option>
+            <option className='form-control' value={2}>4 قسط سه ماهه</option>
+            <option className='form-control' value={3}>12 قسط ماهانه</option>
         </select>
         {next()}
         {prev()}

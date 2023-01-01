@@ -20,14 +20,16 @@ const JobForm = ({next, prev}) => {
     return (
       <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
           <label>استعلام بیمه عمر اندوخته دار امید</label>
-          <select className='form-control form-select' placeholder='شغل اول' onChange={(e) => {
-            setState({
-              ...state,
-              first_job : e.target.value
-            })
-          }}>
+          <select className='form-control form-select' placeholder='شغل اول' onClick={(e) => {
+                let index = e.target.options.selectedIndex;
+                let result = e.target.options[index].value;
+                setState({
+                  ...state,
+                  first_job : result
+                })
+              }}>
             {jobs.map(job => (
-              <option className='text-secondary' key={job.id} value={job.title}>{job.title}</option>
+              <option className='text-secondary' key={job.id} value={job.id} >{job.title}</option>
             ))}
           </select>
           <input className='form-control' placeholder='شغل دوم (اختیاری)' onChange={(e) => {

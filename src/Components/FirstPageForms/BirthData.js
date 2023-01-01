@@ -3,6 +3,7 @@ import { FormContext } from '../../Contexts/FormContext';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
+import Swal from 'sweetalert2';
 const BirthData = () => {
     const date = new DateObject({ calendar: persian, locale: persian_fa })
     const {state,setState} = useContext(FormContext);
@@ -60,14 +61,18 @@ const BirthData = () => {
             
             <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
                 let age = checkAge();
-                if(1){
+                if(state.relativity == 1 && age < 18){
+                    console.log('age under 18');
+                    Swal.fire('your age is under 18');
+                }else if(age >= 65){
+                    Swal.fire('age should be under 65')
+                }
+                else{
                     setState({
                         ...state,
                         step : state.step + 1,
                         age : age
                     });
-                }else{
-                    console.log('age not reached');
                 }
             }}>بعدی</button>
             

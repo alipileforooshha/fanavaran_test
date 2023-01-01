@@ -11,15 +11,15 @@ const FormContainer = () => {
     
     const[state,setState] = useState({
         step : 1,
-        relativity : 'test',
-        first_job : '',
-        second_job : '',
-        birth_day : '',
-        birth_month : '',
-        birth_year : '',
+        relativity : 1,
+        first_job : 1,
+        second_job : 1,
+        birth_day : 1,
+        birth_month : 1,
+        birth_year : 1332,
         age : 2,
-        insurance_length : '',
-        payment_method : '',
+        insurance_length : 5,
+        payment_method : 1,
         first_payment : '',
     });
     function next() {
@@ -60,15 +60,15 @@ const FormContainer = () => {
             {
                 returnForm()
             }
-            <h2>{state.relativity}</h2>
-            <h2>{state.first_job}</h2>
-            <h2>{state.birth_day}</h2>
-            <h2>{state.birth_month}</h2>
-            <h2>{state.birth_year}</h2>
-            <h2>{state.insurance_length}</h2>
-            <h2>{state.payment_method}</h2>
-            <h2>{state.first_payment}</h2>
-            <h2>{state.age}</h2>
+            <h2>{state.relativity} : relativity</h2>
+            <h2>{state.first_job} : first_job</h2>
+            <h2>{state.birth_day} : birth_day</h2>
+            <h2>{state.birth_month} : birth_month</h2>
+            <h2>{state.birth_year} : birth_year</h2>
+            <h2>{state.insurance_length} : insurance_length</h2>
+            <h2>{state.payment_method} : payment_method</h2>
+            <h2>{state.first_payment} : first_payment</h2>
+            <h2>{state.age} : age</h2>
         </FormContext.Provider>
   )
 }
