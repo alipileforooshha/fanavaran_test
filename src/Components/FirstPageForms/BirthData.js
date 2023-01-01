@@ -24,7 +24,7 @@ const BirthData = () => {
     return (
     <div className='form-grou m-4 d-flex flex-column w-50 m-auto'>
             <label>روز تولد</label>
-            <select className='form-control form-select' onChange={(e) => {
+            <select className='form-control form-select' value={state.birth_day} onChange={(e) => {
                 setState({
                 ...state,
                 birth_day : e.target.value
@@ -36,7 +36,7 @@ const BirthData = () => {
             </select>
 
             <label>ماه تولد</label>
-            <select className='form-control form-select' onChange={(e) => {
+            <select className='form-control form-select' value={state.birth_month} onChange={(e) => {
                 setState({
                 ...state,
                 birth_month : e.target.value
@@ -48,7 +48,7 @@ const BirthData = () => {
             </select>
 
             <label>سال تولد</label>
-            <select className='form-control form-select' onChange={(e) => {
+            <select className='form-control form-select' value={state.birth_year} onChange={(e) => {
             setState({
               ...state,
               birth_year : e.target.value

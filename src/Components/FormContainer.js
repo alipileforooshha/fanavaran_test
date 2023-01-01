@@ -8,7 +8,8 @@ import RelativeForm from './FirstPageForms/RelativeForm';
 import { FormContext } from '../Contexts/FormContext';
 
 const FormContainer = () => {
-    
+    const [page, setPage] = useState(1);
+
     const[state,setState] = useState({
         step : 1,
         relativity : 1,
@@ -22,6 +23,19 @@ const FormContainer = () => {
         payment_method : 1,
         first_payment : '',
     });
+
+    const tabs = [
+        {
+          title: 'نسبت',
+          pageNo: 1
+          // onPress: e => console.log(e)
+        },
+        {title: 'شغل', pageNo: 2},
+        {title: 'تاریخ تولد', pageNo: 3},
+        {title: 'مدت بیمه نامه', pageNo: 4},
+        {title: 'نوع پرداخت', pageNo: 5},
+        {title: 'اولین پرداخت', pageNo: 6},
+      ];
     function next() {
         return <button className='btn btn-primary mt-3' onClick={() => {
             setState({

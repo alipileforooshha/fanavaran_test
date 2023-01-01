@@ -1,18 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FormContext } from '../../Contexts/FormContext';
 import Swal from 'sweetalert2';
 
 const FirstYearPayment = ({prev}) => {
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   const {state, setState} = useContext(FormContext)
+  const[input_value,setInput] = useState(0);
   return (
     <div className='form-group m-4 d-flex flex-column w-50 m-auto' >
         <label>مبلغ پرداختی سال اول</label>
         <input className='form-control' onChange={(e) => {
             setState({
               ...state,
-              first_payment : e.target.value
+              first_payment : e.target.value.replace(/,/g, '')
             });
-            console.log(state);
+            e.target.value = numberWithCommas(e.target.value.replace(/,/g, '')) 
           }}></input>
         <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
             if(state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2 && e.target.value < 400000){
