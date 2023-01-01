@@ -29,8 +29,13 @@ const JobForm = ({next, prev}) => {
     return (
       <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
           <label>استعلام بیمه عمر اندوخته دار امید</label>
-          <input  className='form-control' defaultValue={state.job_name} placeholder = {job} onChange={(e) => {
+          <input  className='form-control' defaultValue={state.job_name} value={state.job_name} placeholder = {job} onChange={(e) => {
             searchOptions(e)
+            setState({
+              ...state,
+              first_job : 0,
+              job_name : e.target.value
+            })
           }} />
             {results?results.map((value)=>{
                 return <span className='m-2 p-2 border border bg-dark text-white' value={value.id} onClick={(e)=>{

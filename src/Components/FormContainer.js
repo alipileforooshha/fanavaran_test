@@ -77,6 +77,7 @@ const FormContainer = () => {
             }
             <h2>{state.relativity} : relativity</h2>
             <h2>{state.first_job} : first_job</h2>
+            <h2>{state.job_name} : job name</h2>
             <h2>{state.birth_day} : birth_day</h2>
             <h2>{state.birth_month} : birth_month</h2>
             <h2>{state.birth_year} : birth_year</h2>
