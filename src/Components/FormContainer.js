@@ -15,6 +15,7 @@ const FormContainer = () => {
         relativity : 1,
         first_job : 1,
         second_job : 1,
+        job_name : '',
         birth_day : 1,
         birth_month : 1,
         birth_year : 1332,
