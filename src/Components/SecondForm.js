@@ -7,7 +7,7 @@ import { FormContext } from '../Contexts/FormContext'
 function SecondForm() {
   return (
     <div>
-      <div className='col d-inline p-0'>
+      <div className='text-center'>
         <InsuranceInfo />
         <FirstYearForm />
         <CoverenceForm />

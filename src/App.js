@@ -11,18 +11,18 @@ function App() {
   const varw = "ali";
   const AppContext = React.createContext()
   const[state,setState] = useState({
-    step : 1,
+    step : 6,
     relativity : 1,
-    first_job : 1,
+    first_job : 5,
     second_job : 1,
     job_name : '',
     birth_day : 1,
     birth_month : 1,
-    birth_year : 1332,
+    birth_year : 1370,
     age : 2,
     insurance_length : 5,
-    payment_method : 1,
-    first_payment : '',
+    payment_method : 4,
+    first_payment : 1000000,
   });
   return (
       // <div className="App">

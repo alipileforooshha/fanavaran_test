@@ -11,16 +11,16 @@ function InsuranceInfo() {
     const {state, setState} = useContext(FormContext)
     const [installment, setInstallment] = useState(state.first_payment);
     const [incrementPercent, setIncrementPercent] = useState([]);
-    useEffect = (() => {
-        // setInstallmentValue();
+    useEffect(() => {
+        setInstallmentValue();
         let increments = [];
 
         for(let i = 0; i<26 ; i++){
             if(i%5 == 0)
                 increments.push(i)
         }
-        // setIncrementPercent(increments);
-    });
+        setIncrementPercent(increments);
+    },[]);
     const setInstallmentValue = () => {
         switch (state.payment_method) {
             case 0:
@@ -46,17 +46,18 @@ function InsuranceInfo() {
             <BirthData />
             <InsuranceLength />
             <PaymentMethod />
-            {/* <input className='form-control w-50 mt-4' value={state.first_payment / state.payment_method } readOnly={true} onChange={(e) => {
+            <label>قسط اول</label>
+            <input className='form-control w-50 mt-4' value={state.first_payment / state.payment_method } readOnly={true} onChange={(e) => {
                 setInstallment(0);
                 e.target.value = installment;
             }}>
-            </input> */}
-            {/* <label>افزایش سالانه حق بیمه</label>
-            <select className='form-control w-50 mt-4 text-center'>
+            </input>
+            <label>افزایش سالانه حق بیمه</label>
+            <select className='form-select w-50 mt-4 text-center'>
                 {incrementPercent && incrementPercent.map((element) => {
                     return <option value={element}>{element}</option>
                 })}
-            </select> */}
+            </select>
             <FirstYearPayment />
         </div>
   )
