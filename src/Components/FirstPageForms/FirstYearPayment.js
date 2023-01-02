@@ -3,13 +3,14 @@ import { FormContext } from '../../Contexts/FormContext';
 import Swal from 'sweetalert2';
 import { Axios } from 'axios';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const FirstYearPayment = ({prev}) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   const {state, setState} = useContext(FormContext)
   const[input_value,setInput] = useState(0);
-
+  const navigate = useNavigate();
   function postData(){
     axios.post('http://127.0.0.1:8000/api/jobs',{
         step : state.step,
@@ -26,6 +27,7 @@ const FirstYearPayment = ({prev}) => {
         first_payment : state.first_payment,
     }).then((response)=>{
       console.log(response.data);
+      navigate('/second');
     }).catch((error)=>{
       console.log(error);
     })
@@ -43,10 +45,10 @@ const FirstYearPayment = ({prev}) => {
             
           }}></input>
         <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
-            if(state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2 && parseInt(e.target.value.replace(/,/g, '')) < 400000){
+            if((state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2) && state.first_payment < 400000){
               Swal.fire('پرداختی سال اول باید بالای 400 هزار تومان باشد');
             } 
-            else if(state.payment_method == 3 && e.target.value < 600000){
+            else if(state.payment_method == 3 && state.first_payment < 600000){
               Swal.fire('پرداختی سال اول باید بالای 600 هزار تومان باشد');
             }else{
               postData();
