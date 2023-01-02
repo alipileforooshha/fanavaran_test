@@ -22,8 +22,6 @@ const InsuranceLength = ({next, prev}) => {
                     return <option key={index} className='form-control'>{value}</option>
                 })}
         </select>
-        {next()}
-        {prev()}
     </div>
   )
 }

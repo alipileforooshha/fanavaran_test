@@ -53,8 +53,6 @@ const JobForm = ({next, prev}) => {
               second_job : e.target.value
             })
           }}></input>
-          {next()}
-          {prev()}
       </div>
     )
 }

@@ -1,10 +1,16 @@
 import React from 'react'
+import InsuranceInfo from './SecondPageForms/InsuranceInfo'
+import FirstYearForm from './SecondPageForms/FirstYearForm'
+import CoverenceForm from './SecondPageForms/CoverenceForm'
+import { FormContext } from '../Contexts/FormContext'
 
 function SecondForm() {
   return (
-    <div>
-      <h2>this is the second page</h2>
-    </div>
+      <div>
+        <InsuranceInfo />
+        <FirstYearForm />
+        <CoverenceForm />
+      </div>
   )
 }
 

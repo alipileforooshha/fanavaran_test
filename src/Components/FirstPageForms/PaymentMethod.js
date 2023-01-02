@@ -17,8 +17,7 @@ const PaymentMethod = ({next, prev}) => {
             <option className='form-control' value={2}>4 قسط سه ماهه</option>
             <option className='form-control' value={3}>12 قسط ماهانه</option>
         </select>
-        {next()}
-        {prev()}
+
     </div>
   )
 }

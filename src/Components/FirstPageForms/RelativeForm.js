@@ -30,7 +30,6 @@ const RelativeForm = ({next}) => {
               <option className='text-dark' value={8}>پدربزرگ</option>
               <option className='text-dark' value={9}>مادربزرگ</option>
           </select>
-        {next()}
     </div>
   )
 }
