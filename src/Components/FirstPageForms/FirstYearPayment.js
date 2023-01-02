@@ -1,13 +1,35 @@
 import React, { useContext, useState } from 'react'
 import { FormContext } from '../../Contexts/FormContext';
 import Swal from 'sweetalert2';
-
+import { Axios } from 'axios';
+import axios from 'axios';
 const FirstYearPayment = ({prev}) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   const {state, setState} = useContext(FormContext)
   const[input_value,setInput] = useState(0);
+
+  function postData(){
+    axios.post('http://127.0.0.1:8000/api/jobs',{
+        step : state.step,
+        relativity : state.relativity,
+        first_job : state.first_job,
+        second_job : state.second_job,
+        job_name : state.job_name,
+        birth_day : state.birth_day,
+        birth_month : state.birth_month,
+        birth_year : state.birth_year,
+        age : state.age,
+        insurance_length : state.insurance_length,
+        payment_method : state.payment_method,
+        first_payment : state.first_payment,
+    }).then((response)=>{
+      console.log(response.data);
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
   return (
     <div className='form-group m-4 d-flex flex-column w-50 m-auto' >
         <label>مبلغ پرداختی سال اول</label>
@@ -21,12 +43,14 @@ const FirstYearPayment = ({prev}) => {
             
           }}></input>
         <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
-            if(state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2 && e.target.value < 400000){
+            if(state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2 && parseInt(e.target.value.replace(/,/g, '')) < 400000){
               Swal.fire('پرداختی سال اول باید بالای 400 هزار تومان باشد');
             } 
             else if(state.payment_method == 3 && e.target.value < 600000){
               Swal.fire('پرداختی سال اول باید بالای 600 هزار تومان باشد');
-            } 
+            }else{
+              postData();
+            }
         }}>مشاهده استعلام</button>
             
         <button type='button' className='btn btn-primary my-2' onClick={(e) => {

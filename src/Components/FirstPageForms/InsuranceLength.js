@@ -11,7 +11,7 @@ const InsuranceLength = ({next, prev}) => {
     <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
         <label>مدت بیمه نامه</label>
         <label>{state.age ? state.age : 10}</label>
-        <select className='form-control form-select' onChange={(e) => {
+        <select className='form-control form-select' defaultValue={state.insurance_length} onChange={(e) => {
             setState({
               ...state,
               insurance_length : e.target.value
