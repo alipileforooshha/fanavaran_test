@@ -7,7 +7,7 @@ const RelativeForm = ({next}) => {
   const {state,setState} = useContext(FormContext);
   
   return (
-    <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
         <label>نسبت با بیمه شونده</label>
           <select className='text-dark form-control form-select' value={state.relativity} name='relativity' onChange={
               (event) => {

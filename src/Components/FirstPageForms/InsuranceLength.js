@@ -8,7 +8,7 @@ const InsuranceLength = ({next, prev}) => {
     console.log('state age is',state.age);
 
     return (
-    <div className='form-group m-4 d-flex flex-column w-50 m-auto'>
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
         <label>مدت بیمه نامه</label>
         <label>{state.age ? state.age : 10}</label>
         <select className='form-control form-select' defaultValue={state.insurance_length} onChange={(e) => {

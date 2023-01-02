@@ -13,7 +13,7 @@ const FirstYearPayment = ({prev}) => {
   const navigate = useNavigate();
   
   return (
-    <div className='form-group m-4 d-flex flex-column w-50 m-auto' >
+    <div className='form-group m-4 d-flex flex-column w-50 m-auto mt-4' >
         <label>مبلغ پرداختی سال اول</label>
         <input
             className='form-control' value={numberWithCommas(state.first_payment)} onChange={(e) => {
@@ -21,19 +21,8 @@ const FirstYearPayment = ({prev}) => {
                 ...state,
                 first_payment : parseInt(e.target.value.replace(/,/g, ''))
               });
-              e.target.value = numberWithCommas(e.target.value.replace(/,/g, ''))
-            
-          }}></input>
-        <button type="submit" className='btn btn-primary my-2' onClick={(e) => {
-            
-        }}>مشاهده استعلام</button>
-            
-        <button type='button' className='btn btn-primary my-2' onClick={(e) => {
-            setState({
-                ...state,
-                step : state.step - 1
-            });
-        }}>قبلی</button>
+              e.target.value = numberWithCommas(e.target.value.replace(/,/g, ''))  
+        }}></input>
     </div>
     )
 }

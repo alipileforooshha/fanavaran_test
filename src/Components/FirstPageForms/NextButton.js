@@ -38,25 +38,25 @@ function NextButton() {
       case 1:
         return checkRelativeCondition()
         break;
-        case 2:
-          return checkJobCondition()
-          break;
-          case 3:
-            return checkAgeCondition()
-            break;
-            case 4:
-              return checkInsuranceLengthCondition()
-              break;
-              case 5:
-                return checkPaymentMethodCondition()
-                break;
-                case 6:
-                  return checkFirstPaymentCondition()
-                  break;
-                  default:
+      case 2:
+        return checkJobCondition()
         break;
-      }
+      case 3:
+        return checkAgeCondition()
+        break;
+      case 4:
+        return checkInsuranceLengthCondition()
+        break;
+      case 5:
+        return checkPaymentMethodCondition()
+        break;
+      case 6:
+        return checkFirstPaymentCondition()
+        break;
+        default:
+      break;
     }
+  }
     
     const checkRelativeCondition = () => {
       return 1

@@ -11,7 +11,7 @@ const BirthData = () => {
     const years = Array.from({length: 1000}, (_, i) => i + 1332);
     
     return (
-        <div className='form-grou m-4 d-flex flex-column w-50 m-auto'>
+        <div className='form-grou m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
                 <label>روز تولد</label>
                 <select className='form-control form-select' value={state.birth_day} onChange={(e) => {
                     setState({
