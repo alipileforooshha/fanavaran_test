@@ -11,6 +11,10 @@ function InsuranceInfo() {
     const {state, setState} = useContext(FormContext)
     const [installment, setInstallment] = useState(state.first_payment);
     const [incrementPercent, setIncrementPercent] = useState([]);
+    const paymentTypes = [
+        {value : 0, title : "جداگانه پرداخت میکنم"},
+        {value : 1, title : "از حق بیمه کسر گردد"}
+    ];
     useEffect(() => {
         setInstallmentValue();
         let increments = [];
@@ -40,7 +44,7 @@ function InsuranceInfo() {
         }
     }
     return (
-        <div className='border border-dark text-center'>
+        <div className='border border-secondary p-3 m-2 text-center'>
             <RelativeForm />
             <JobForm />
             <BirthData />
@@ -52,13 +56,19 @@ function InsuranceInfo() {
                 e.target.value = installment;
             }}>
             </input>
+            <FirstYearPayment />
             <label>افزایش سالانه حق بیمه</label>
             <select className='form-select w-50 mt-4 text-center'>
                 {incrementPercent && incrementPercent.map((element) => {
                     return <option value={element}>{element}</option>
                 })}
             </select>
-            <FirstYearPayment />
+            <label>نحوه پرداخت حق پوشش بیمه های اضافی</label>
+            <select className='form-select w-50 mt-4 text-center'>
+                {paymentTypes && paymentTypes.map((element) => {
+                    return <option value={element.value}>{element.title}</option>
+                })}
+            </select>
         </div>
   )
 }
