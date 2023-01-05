@@ -12,7 +12,6 @@ const JobForm = ({next, prev}) => {
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/jobs').then((response) => {
       setJobs(response.data);
-      console.log(jobs);
       setLoading(true)
     });
   },[]);
@@ -21,7 +20,6 @@ const JobForm = ({next, prev}) => {
       return job.title.toLowerCase().includes(e.target.value.toLowerCase());
     }) : [];
     setResults(filter_results);
-    console.log(results);
   }
   if(!loading)
     return <h2>Loading</h2>

@@ -43,6 +43,12 @@ function InsuranceInfo() {
                 break;
         }
     }
+
+    const inputs = [
+        {
+             
+        }
+    ];
     return (
         <div className='border border-secondary p-3 m-2 text-center'>
             <RelativeForm />

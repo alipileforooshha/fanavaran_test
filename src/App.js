@@ -6,10 +6,9 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import SecondForm from './Components/SecondForm';
 import ErrorPage from './Components/ErrorPage';
 import { FormContext } from './Contexts/FormContext';
-
 function App() {
-  const varw = "ali";
-  const AppContext = React.createContext()
+  // const varw = "ali";
+  // const AppContext = React.createContext()
   const[state,setState] = useState({
     step : 6,
     relativity : 1,

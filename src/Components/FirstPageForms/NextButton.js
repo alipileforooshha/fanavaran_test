@@ -118,7 +118,7 @@ function NextButton() {
               setState({
                 ...state,
                 step : state.step + 1
-              });
+              },console.log(state));
             }
         }}>بعدی</button>
     </div>
