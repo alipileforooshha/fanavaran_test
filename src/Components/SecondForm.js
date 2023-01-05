@@ -4,10 +4,14 @@ import FirstYearForm from './SecondPageForms/FirstYearForm'
 import CoverenceForm from './SecondPageForms/CoverenceForm'
 import { FormContext } from '../Contexts/FormContext'
 import { SecondFormContext } from '../Contexts/SecondFormContext'
+import NextButton from './SecondPageForms/NextButton'
+import PreviousButton from './SecondPageForms/PreviousButton'
+import MedicalCondition from './SecondPageForms/MedicalCondition'
 function SecondForm() {
   const {state,setState} = useContext(FormContext);
   const [secondForm,setSecondForm] = useState({
     ...state,
+    second_step : 1,
     death_invest : 5,
     invest_increasement : 5,
     death_by_accident : 0,
@@ -18,21 +22,47 @@ function SecondForm() {
     clearance_to_pay_insurance : 0,
     special_illness : 0,
   });
-  return (
-    <SecondFormContext.Provider value={{secondForm,setSecondForm}}>
-      <div className='row'>
+
+  function formBuiler() {
+    if(secondForm.second_step == 1){
+      return <div>
         <div className='text-center col'>
           <InsuranceInfo />
           <FirstYearForm />
           <CoverenceForm />
         </div>
-        <div className='col-7'>
-          <h2>
-            most of the page
-          </h2>
-        </div>
-
       </div>
+    }
+    if(secondForm.second_step == 2){
+      return <div>
+        <div className='text-center col'>
+          <MedicalCondition />
+        </div>
+      </div>
+    }
+    if(secondForm.second_step == 3){
+      return <div>
+        <div className='text-center col'>
+          <h3>third page</h3>
+        </div>
+      </div>
+    }
+    if(secondForm.second_step == 4){
+      return <div>
+        <div className='text-center col'>
+          <h3>fourth page</h3>
+        </div>
+      </div>
+    }
+  }
+  return (
+    <SecondFormContext.Provider value={{secondForm,setSecondForm}}>
+      <div className='row'>
+        {formBuiler()}
+      </div>
+      <NextButton />
+      <PreviousButton />
+      <h2>{secondForm.second_step} : second_step</h2>
       <h2>{secondForm.death_invest} : death_invest</h2>
       <h2>{secondForm.invest_increasement} : invest_increasement</h2>
       <h2>{secondForm.death_by_accident} : death_by_accident</h2>

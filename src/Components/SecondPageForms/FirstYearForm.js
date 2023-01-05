@@ -53,9 +53,9 @@ function FirstYearForm() {
       {inputs.map((value,index)=>{
         return <div>
           <label>{value.label}</label>
-          <select type={value.type} name={value.name} className="form-select" onChange={value.onchange}>
-            {value.options.map((option) => {
-              return <option value={option.value}>
+          <select type={value.type} name={value.name} key={index} className="form-select" onChange={value.onchange}>
+            {value.options.map((option,index) => {
+              return <option value={option.value} key={index}>
                 {option.title}
               </option>
             })}
