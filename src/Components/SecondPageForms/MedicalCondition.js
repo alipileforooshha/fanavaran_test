@@ -1,7 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { SecondFormContext } from '../../Contexts/SecondFormContext'
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
+
+// const schema = yup.object().shape({
+//     ssn : yup.number().positive().required()
+// })
 function MedicalCondition() {
+    // const {register , handleSubmit, errors} = useForm({
+    //     resolver : yupResolver(schema)
+    // });
     const {secondForm, setSecondForm} = useContext(SecondFormContext);
     const [state, setState] = useState({
         mother_alive : 1,
@@ -17,34 +27,40 @@ function MedicalCondition() {
         {
             type : "input",
             label : "کد ملی بیمه شده",
+            name : "ssn",
             placeholder : "لطفا کد ملی 10 رقمی را وارد نمایید",
             value : secondForm.national_code
         },
         {
             type : "input",
+            name : 'birth_date',
             label : "تاریخ تولد بیمه شده",
             value : secondForm.birth_year
         },
         {
             type : "input",
+            name : "mobile",
             label : "شماره موبایل بیمه شده",
             placeholder : "09128813755",
             value : secondForm.mobile_number
         },
         {
             type : "input",
+            name : "height",
             label : "قد بیمه شده",
             placeholder : "",
             value : secondForm.height
         },
         {
             type : "input",
+            name : 'weight',
             label : "وزن بیمه شده",
             placeholder : "",
             value : secondForm.weight
         },
         {
             type : "select",
+            name : "gender",
             label : "جنسیت بیمه شده",
             placeholder : "",
             value : 1,
@@ -63,6 +79,7 @@ function MedicalCondition() {
             type : "select",
             label : "وضعیت خدمت سربازی",
             placeholder : "",
+            name : "military",
             value : state.military_status,
             options : [
                 {
@@ -114,6 +131,7 @@ function MedicalCondition() {
             type : "select",
             label : "تاریخچه فامیلی",
             placeholder : "",
+            name : 'father_status',
             value : state.father_death,
             onchange : (e) => {
                 if(e.target.value == 0){
@@ -153,6 +171,7 @@ function MedicalCondition() {
             type : "select",
             placeholder : "",
             value : state.mother_death,
+            name : 'mother_status',
             onchange : (e) => {
                 if(e.target.value == 0){
                     setState({
@@ -220,6 +239,7 @@ function MedicalCondition() {
             type : "input",
             label : "توضیحات بیماری خانوادگی",
             placeholder : "",
+            name : 'family_description',
             value : secondForm.weight,
             disable : state.family_health
         },
@@ -228,6 +248,7 @@ function MedicalCondition() {
             label : "استعمال دخانیات",
             placeholder : "",
             value : 1,
+            name : "smoking",
             options : [
                 {
                     title : "بله",
@@ -243,6 +264,7 @@ function MedicalCondition() {
             type : "select",
             label : "سابقه بستری یا جراحی قبلی",
             placeholder : "",
+            name : "hospitalization",
             value : state.hospitalization,
             onchange : (e) =>{
                 if(e.target.value == 1){
@@ -272,16 +294,19 @@ function MedicalCondition() {
             type : "input",
             label : "توضیحات بیماری خانوادگی",
             placeholder : "",
+            name : 'family_illness',
             value : secondForm.weight,
             disable : !state.hospitalization
         },
         {
             type : "input",
+            name : "physical_record",
             label : "سابقه جسمانی",
             placeholder : "اگر قبلا سابقه نقص عضو و یا از کارافتادگی داشتید علت آن را بیان کنید",
         },
         {
             type : "input",
+            name : "daily_medicine_consume",
             label : "مصرف روزانه دارو",
             placeholder : "اگر به صورت مرتب و روزانه دارو مصرف میکنید لطفا نام آن را قید کنید",
         },
@@ -289,6 +314,7 @@ function MedicalCondition() {
             type : "select",
             label : "وضعیت سلامتی فعلی",
             placeholder : "",
+            name : "current_physical_state",
             value : state.full_health,
             onchange : (e) =>{
                 if(e.target.value == 1){
@@ -318,6 +344,7 @@ function MedicalCondition() {
             type : "input",
             label : "توضیحات بیماری خانوادگی",
             placeholder : "",
+            name : "family_illness_description",
             value : secondForm.weight,
             disable : state.full_health
         },
@@ -325,6 +352,7 @@ function MedicalCondition() {
             type : "select",
             label : "کاهش/افزایش وزن",
             placeholder : "",
+            name : "weight_change",
             value : state.weight_change,
             onchange : (e) =>{
                 if(e.target.value > 0){
@@ -368,14 +396,14 @@ function MedicalCondition() {
             if(input.type == "input"){
                 return <div className='d-flex justify-content-between mt-3'>
                     <label className='text-nowrap mx-4'>{input.label}</label>
-                    <input className='form-control' defaultValue={input.value} placeholder={input.placeholder} disabled={input.disable}></input>
+                    <input name={input.name} className='form-control' defaultValue={input.value} placeholder={input.placeholder} disabled={input.disable}></input>
                 </div>
             }
             if(input.type == "select"){
                 return <div className='d-flex justify-content-between mt-3'>
                     <label className='text-nowrap mx-4'>{input.label}</label>
                     <div className='w-100 d-flex justify-content-between'>
-                        <select className='form-select' defaultValue={input.value} placeholder={input.placeholder} onChange={input.onchange}>
+                        <select name={input.name} className='form-select' defaultValue={input.value} placeholder={input.placeholder} onChange={input.onchange}>
                             {input.options.map((option) => {
                                 return <option value={option.value}>{option.title}</option>
                             })}

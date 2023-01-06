@@ -60,8 +60,10 @@ function SecondForm() {
       <div className='row'>
         {formBuiler()}
       </div>
-      <NextButton />
-      <PreviousButton />
+      <div className='d-flex justify-content-around w-100'>
+        <PreviousButton />
+        <NextButton />
+      </div>
       <h2>{secondForm.second_step} : second_step</h2>
       <h2>{secondForm.death_invest} : death_invest</h2>
       <h2>{secondForm.invest_increasement} : invest_increasement</h2>

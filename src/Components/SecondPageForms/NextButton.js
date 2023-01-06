@@ -47,7 +47,7 @@ function NextButton() {
                 break;
         
             case 2:
-                return 'کیس دوم'
+                return 'تایید نهایی'
                 break;
         
             case 3:
@@ -67,7 +67,7 @@ function NextButton() {
     }
     return (
         <div>
-            <button className='btn btn-primary w-100 m-2' onClick={() => 
+            <button className='btn btn-success w-100 m-2' onClick={() => 
             {
                 checkCondition()
             }}>
