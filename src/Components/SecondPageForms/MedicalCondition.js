@@ -1,20 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SecondFormContext } from '../../Contexts/SecondFormContext'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-
-// const schema = yup.object().shape({
-//     ssn : yup.number().positive().required()
-// })
 function MedicalCondition() {
-    // const {register , handleSubmit, errors} = useForm({
-    //     resolver : yupResolver(schema)
-    // });
-    const {secondForm, setSecondForm} = useContext(SecondFormContext);
     const [state, setState] = useState({
-        mother_alive : 1,
+        mother_alive : false,
         father_alive : 1,
         military_medical : 0,
         military_status : 0,
@@ -23,13 +15,34 @@ function MedicalCondition() {
         full_health : 1,
         weight_change : 0
     })
+    useEffect(() => {
+        state.mother_alive ? register('pass',{
+            required : true
+        }) : unregister('pass');
+        console.log(state.mother_alive);
+    }, [state]);
+    
+
+    const validationSchema = yup.object().shape({
+        wes : yup.boolean(),
+        username : yup.string().when('wes', {
+            is: () => state.mother_alive,
+            then: yup.string().required('some message'),
+            otherwise : yup.string().required('wwwwwww'),
+        }),
+        // username : yup.string().required('ssssseww')
+    });
+    const formOptions = {resolver : yupResolver(validationSchema)};
+    
+    const {register , handleSubmit, formState:{errors}, watch, unregister} = useForm(formOptions);
+    const {secondForm, setSecondForm} = useContext(SecondFormContext);
     const inputs = [
         {
             type : "input",
             label : "کد ملی بیمه شده",
             name : "ssn",
             placeholder : "لطفا کد ملی 10 رقمی را وارد نمایید",
-            value : secondForm.national_code
+            value : secondForm.national_code,
         },
         {
             type : "input",
@@ -389,33 +402,53 @@ function MedicalCondition() {
             value : secondForm.weight,
             disable : !state.weight_change
         },
+    ];
+    const inputst = [
+        {
+            type : "input",
+            label : "کد ملی بیمه شده",
+            name : "username",
+            placeholder : "لطفا کد ملی 10 رقمی را وارد نمایید",
+            value : secondForm.national_code,
+            disable : true,
+            // rules : {
+            //     required : true
+            // }
+            // registration : {register('username')}
+        },
     ]
+    const submitForm = (data) => {
+        console.log(1)
+    };
+
     return (
         <div>
-        {inputs.map((input) => {
-            if(input.type == "input"){
-                return <div className='d-flex justify-content-between mt-3'>
-                    <label className='text-nowrap mx-4'>{input.label}</label>
-                    <input name={input.name} className='form-control' defaultValue={input.value} placeholder={input.placeholder} disabled={input.disable}></input>
-                </div>
-            }
-            if(input.type == "select"){
-                return <div className='d-flex justify-content-between mt-3'>
-                    <label className='text-nowrap mx-4'>{input.label}</label>
-                    <div className='w-100 d-flex justify-content-between'>
-                        <select name={input.name} className='form-select' defaultValue={input.value} placeholder={input.placeholder} onChange={input.onchange}>
-                            {input.options.map((option) => {
-                                return <option value={option.value}>{option.title}</option>
-                            })}
-                        </select>
-                        {input.inputs && input.inputs.map((second_input) => {
-                            return <input className='form-control mx-4 w-100' placeholder={second_input.placeholder} disabled={!second_input.disable}></input>
-                        })}
-                    </div>
-                </div>
-            }
-        })}
+
+        <form onSubmit={handleSubmit(submitForm)}>
+        {/* <input placeholder='username' name='username'{...register('username')}>
+
+        </input> */}
+        <input name='wes' className='form-select' value={false} >
+        </input>
+
+
+        <label className='text-nowrap mx-4'>{'dasdawd'}</label>
+        <input name={'username'}
+            className='form-control'
+            // defaultValue={input.value}
+            placeholder={'wddddd'}
+            // disabled = {true ? unregister(input.name) : ''}
+            // {state.mother_alive ? disable : disable}
+            >
+        </input>
+        
+        {errors.username && <p>{errors.username.message}</p>}
+
+
+        <input type="submit" />
+    </form>
     </div>
+        
   )
 }
 

@@ -65,14 +65,14 @@ function InsuranceInfo() {
             <FirstYearPayment />
             <label>افزایش سالانه حق بیمه</label>
             <select className='form-select w-50 mt-4 text-center'>
-                {incrementPercent && incrementPercent.map((element) => {
-                    return <option value={element}>{element}</option>
+                {incrementPercent && incrementPercent.map((element,index) => {
+                    return <option value={element} key={index}>{element}</option>
                 })}
             </select>
             <label>نحوه پرداخت حق پوشش بیمه های اضافی</label>
             <select className='form-select w-50 mt-4 text-center'>
-                {paymentTypes && paymentTypes.map((element) => {
-                    return <option value={element.value}>{element.title}</option>
+                {paymentTypes && paymentTypes.map((element, index) => {
+                    return <option value={element.value} key={index}>{element.title}</option>
                 })}
             </select>
         </div>

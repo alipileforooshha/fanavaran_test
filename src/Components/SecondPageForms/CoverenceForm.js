@@ -201,11 +201,11 @@ function CoverenceForm() {
         پیشنهاد کارشناسان
       </button>
       {inputs.map((value,index)=>{
-        return <div>
+        return <div key={index}>
           <label>{value.label}</label>
           <select type={value.type} name={value.name} value={value.value} className="form-select" onChange={value.onchange} disabled={value.disable}>
-            {value.options.map((option) => {
-              return <option value={option.value}>
+            {value.options.map((option,index) => {
+              return <option value={option.value} key={index}>
                 {option.title}
               </option>
             })}

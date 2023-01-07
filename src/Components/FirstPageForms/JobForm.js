@@ -27,7 +27,7 @@ const JobForm = ({next, prev}) => {
     return (
       <div className='form-group m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
           <label>استعلام بیمه عمر اندوخته دار امید</label>
-          <input  className='form-control' defaultValue={state.job_name} value={state.job_name} placeholder = {job} onChange={(e) => {
+          <input  className='form-control' value={state.job_name} placeholder = {job} onChange={(e) => {
             searchOptions(e)
             setState({
               ...state,
