@@ -62,7 +62,7 @@ function SecondForm() {
       </div>
       <div className='d-flex justify-content-around w-100'>
         <PreviousButton />
-        <NextButton />
+        {/* <NextButton /> */}
       </div>
       <h2>{secondForm.second_step} : second_step</h2>
       <h2>{secondForm.death_invest} : death_invest</h2>

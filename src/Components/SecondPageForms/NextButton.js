@@ -67,10 +67,7 @@ function NextButton() {
     }
     return (
         <div>
-            <button className='btn btn-success w-100 m-2' onClick={() => 
-            {
-                checkCondition()
-            }}>
+            <button type="submit"  className='btn btn-success w-100 m-2' >
                 {innerText()}
             </button>
         </div>
