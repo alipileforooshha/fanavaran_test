@@ -19,11 +19,13 @@ function MedicalCondition() {
     })
 
     const validationSchema = yup.object().shape({
-        ssn : yup.string().required('باید حتما پر شده باشد'),
+        ssn : yup.number().typeError('کد ملی باید عددی باشد').
+        test('len', 'باید بین 5 تا 10 حرف باشد', val => val.toString().length >= 5 && val.toString().length <= 10)
+        .required('باید حتما پر شده باشد'),
         birth_date : yup.string().required('باید حتما پر شده باشد'),
-        mobile : yup.number('مقدار باید عددی باشد').required('باید حتما پر شده باشد'),
-        height : yup.number('مقدار باید عددی باشد').required('باید حتما پر شده باشد'),
-        weight : yup.number('مقدار باید عددی باشد').required('باید حتما پر شده باشد'),
+        mobile : yup.number('مقدار باید عددی باشد').typeError('موبایل باید عددی باشد').required('باید حتما پر شده باشد'),
+        height : yup.number('مقدار باید عددی باشد').typeError('قد باید عددی باشد').required('باید حتما پر شده باشد'),
+        weight : yup.number('مقدار باید عددی باشد').typeError('وزن ملی باید عددی باشد').required('باید حتما پر شده باشد'),
         gender : yup.string('مقدار باید عددی باشد').required('pppppppp'),
         cancelation_detail_boolean : yup.boolean(),
         cancelation_detail : yup.string().when('cancelation_detail_boolean',{
@@ -75,12 +77,15 @@ function MedicalCondition() {
             is : () => state.weight_change == 1,
             then : yup.string('سن مادر باید عددی باشد').required('lwwwwlll2llllll1000')
         }),
-
-        // username : yup.string().required('ssssseww')
     });
-    const formOptions = {resolver : yupResolver(validationSchema)};
+    const formOptions = {resolver : yupResolver(validationSchema),};
     
-    const {register , handleSubmit, formState:{errors}, watch, unregister} = useForm(formOptions);
+    const {register , handleSubmit, formState:{errors}, watch, unregister} = useForm({
+        resolver : yupResolver(validationSchema),
+        reValidateMode : "onChange",
+        mode : 'onChange'
+    });
+    watch();
     const {secondForm, setSecondForm} = useContext(SecondFormContext);
     const inputs = [
         {

@@ -30,7 +30,12 @@ function App() {
       <FormContext.Provider value = {{state,setState}}>
         <Router>
           <nav className='d-flex justify-contents-between'>
-            <Link to="/" className='text-dark mx-4'>first Page</Link>
+            <Link to="/" className='text-dark mx-4' onClick={() => {
+              setState({
+                ...state,
+                step : 1
+              })
+            }}>first Page</Link>
             <Link to="/second" className='text-dark mx-4'>Second Page</Link>
             <Link to="/asdfaddwa" className='text-dark mx-4'>Error Page</Link>
             <hr className='border border-dark'></hr>
