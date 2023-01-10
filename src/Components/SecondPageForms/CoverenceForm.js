@@ -197,8 +197,17 @@ function CoverenceForm() {
   ]
 
   const expertsRecommendation = () =>{
-    inputs[2].value = 2;
-    setShowForms(false);
+    setShowForms(true);
+    setSecondForm({
+      ...secondForm,
+      death_by_accident : 1,
+      disability : 1,
+      medical_cost_by_accident : 1,
+      extra_dangers_package : 1,
+      hospitalization_cost : 0,
+      clearance_to_pay_insurance : 1,
+      special_illness : 1
+    });
   }
   return (
     <div className='border border-secondary p-3 m-2'>

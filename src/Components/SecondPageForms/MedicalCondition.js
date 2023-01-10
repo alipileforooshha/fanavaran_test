@@ -624,7 +624,7 @@ function MedicalCondition() {
                                 <input name={input.name} 
                                     className='form-control'
                                     {...register(input.name)}
-                                    defaultValue={input.value}
+                                    value={input.value}
                                     placeholder={input.placeholder}
                                     disabled={input.disable}>
                                 </input>

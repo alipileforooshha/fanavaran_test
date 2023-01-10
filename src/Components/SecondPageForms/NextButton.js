@@ -67,7 +67,7 @@ function NextButton() {
     }
     return (
         <div>
-            <button type="submit"  className='btn btn-success w-100 m-2' >
+            <button type="submit" className='btn btn-success w-100 m-2' >
                 {innerText()}
             </button>
         </div>

@@ -11,7 +11,7 @@ function SecondForm() {
   const {state,setState} = useContext(FormContext);
   const [secondForm,setSecondForm] = useState({
     ...state,
-    second_step : 2,
+    second_step : 1,
     death_invest : 5,
     invest_increasement : 5,
     death_by_accident : 0,
@@ -22,7 +22,7 @@ function SecondForm() {
     clearance_to_pay_insurance : 0,
     special_illness : 0,
   });
-
+  
   function formBuiler() {
     if(secondForm.second_step == 1){
       return <div>
@@ -30,6 +30,7 @@ function SecondForm() {
           <InsuranceInfo />
           <FirstYearForm />
           <CoverenceForm />
+          <NextButton />
         </div>
       </div>
     }

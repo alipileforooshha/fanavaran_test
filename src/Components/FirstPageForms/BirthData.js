@@ -37,14 +37,14 @@ const BirthData = () => {
                 </select>
 
                 <label className='fs-3 my-3'>سال تولد</label>
-                <select className='form-control form-select' value={state.birth_year} onChange={(e) => {
+                <select className='form-control form-select fs-4' value={state.birth_year} onChange={(e) => {
                 setState({
                 ...state,
                 birth_year : e.target.value
                 });
                 }}>
                     {years.map((value, index) => {
-                        return <option key={index} className='form-control'>{value}</option>;
+                        return <option key={index} className='form-control fs-4'>{value}</option>;
                     })}
                 </select>
         </div>
