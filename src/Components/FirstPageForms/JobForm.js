@@ -26,8 +26,8 @@ const JobForm = ({next, prev}) => {
   if(loading)  
     return (
       <div className='form-group m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
-          <label>استعلام بیمه عمر اندوخته دار امید</label>
-          <input  className='form-control' value={state.job_name} placeholder = {job} onChange={(e) => {
+          <label className='fs-3 my-3'>استعلام بیمه عمر اندوخته دار امید</label>
+          <input  className='form-control fs-4' value={state.job_name} placeholder = {job} onChange={(e) => {
             searchOptions(e)
             setState({
               ...state,
@@ -36,7 +36,7 @@ const JobForm = ({next, prev}) => {
             })
           }} />
             {results?results.map((value)=>{
-                return <span className='m-2 p-2 border border bg-dark text-white' value={value.id} onClick={(e)=>{
+                return <span className='m-2 p-2 border border bg-dark text-white fs-4' value={value.id} onClick={(e)=>{
                   setState({
                     ...state,
                     first_job : value.id,
@@ -45,7 +45,7 @@ const JobForm = ({next, prev}) => {
                   setJob(value.title)
                 }}>{value.title}</span>
             }):[]}
-          <input className='form-control' placeholder='شغل دوم (اختیاری)' onChange={(e) => {
+          <input className='form-control fs-4' placeholder='شغل دوم (اختیاری)' onChange={(e) => {
             setState({
               ...state,
               second_job : e.target.value

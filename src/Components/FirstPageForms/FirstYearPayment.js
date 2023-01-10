@@ -14,9 +14,9 @@ const FirstYearPayment = ({prev}) => {
   
   return (
     <div className='form-group m-4 d-flex flex-column w-50 m-auto mt-4' >
-        <label>مبلغ پرداختی سال اول</label>
+        <label className='fs-3 my-3'>مبلغ پرداختی سال اول</label>
         <input
-            className='form-control' value={numberWithCommas(state.first_payment)} onChange={(e) => {
+            className='form-control fs-4' value={numberWithCommas(state.first_payment)} onChange={(e) => {
               setState({
                 ...state,
                 first_payment : parseInt(e.target.value.replace(/,/g, ''))

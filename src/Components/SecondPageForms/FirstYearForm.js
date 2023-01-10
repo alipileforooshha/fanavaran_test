@@ -52,10 +52,10 @@ function FirstYearForm() {
     <div className='border border-secondary m-2 p-3'>
       {inputs.map((value,index)=>{
         return <div key={index}>
-          <label>{value.label}</label>
-          <select type={value.type} name={value.name} key={index} className="form-select" onChange={value.onchange}>
+          <label className='fs-3 my-3'>{value.label}</label>
+          <select type={value.type} name={value.name} key={index} className="form-select fs-4" onChange={value.onchange}>
             {value.options.map((option,index) => {
-              return <option value={option.value} key={index}>
+              return <option value={option.value} key={index} className="fs-4">
                 {option.title}
               </option>
             })}

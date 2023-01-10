@@ -10,10 +10,10 @@ function App() {
   // const varw = "ali";
   // const AppContext = React.createContext()
   const[state,setState] = useState({
-    step : 5,
+    step : 1,
     relativity : 0,
-    first_job : 5,
-    second_job : 1,
+    first_job : '',
+    second_job : '',
     job_name : '',
     birth_day : '',
     birth_month : '',

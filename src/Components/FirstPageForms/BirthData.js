@@ -12,31 +12,31 @@ const BirthData = () => {
     years.unshift('سال تولد بیمه شونده');
     return (
         <div className='form-grou m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
-                <label>روز تولد</label>
-                <select className='form-control form-select' value={state.birth_day} onChange={(e) => {
+                <label className='fs-3 my-3'>روز تولد</label>
+                <select className='form-control form-select fs-4' value={state.birth_day} onChange={(e) => {
                     setState({
                     ...state,
                     birth_day : e.target.value
                     });
                 }}>
                     {days.map((value, index) => {
-                        return <option key={index} className='form-control'>{value}</option>
+                        return <option key={index} className='form-control fs-4'>{value}</option>
                     })}
                 </select>
 
-                <label>ماه تولد</label>
-                <select className='form-control form-select' value={state.birth_month} onChange={(e) => {
+                <label className='fs-3 my-3'>ماه تولد</label>
+                <select className='form-control form-select fs-4' value={state.birth_month} onChange={(e) => {
                     setState({
                     ...state,
                     birth_month : e.target.value
                     });
                 }}>
                     {months.map((value, index) => {
-                        return <option key={index} className='form-control'>{value}</option>
+                        return <option key={index} className='form-control fs-4'>{value}</option>
                     })}
                 </select>
 
-                <label>سال تولد</label>
+                <label className='fs-3 my-3'>سال تولد</label>
                 <select className='form-control form-select' value={state.birth_year} onChange={(e) => {
                 setState({
                 ...state,

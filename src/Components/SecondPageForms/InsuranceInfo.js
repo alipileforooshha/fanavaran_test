@@ -56,23 +56,23 @@ function InsuranceInfo() {
             <BirthData />
             <InsuranceLength />
             <PaymentMethod />
-            <label>قسط اول</label>
-            <input className='form-control w-50 mt-4' value={state.first_payment / state.payment_method } readOnly={true} onChange={(e) => {
+            <label  className='fs-3 my-3'>قسط اول</label>
+            <input className='form-control w-50 mt-4 fs-4' value={state.first_payment / state.payment_method } readOnly={true} onChange={(e) => {
                 setInstallment(0);
                 e.target.value = installment;
             }}>
             </input>
             <FirstYearPayment />
-            <label>افزایش سالانه حق بیمه</label>
-            <select className='form-select w-50 mt-4 text-center'>
+            <label className='fs-3 my-3'>افزایش سالانه حق بیمه</label>
+            <select className='form-select w-50 mt-4 text-center  fs-4'>
                 {incrementPercent && incrementPercent.map((element,index) => {
-                    return <option value={element} key={index}>{element}</option>
+                    return <option value={element} key={index} className="fs-4">{element}</option>
                 })}
             </select>
-            <label>نحوه پرداخت حق پوشش بیمه های اضافی</label>
-            <select className='form-select w-50 mt-4 text-center'>
+            <label className='fs-3 my-3'>نحوه پرداخت حق پوشش بیمه های اضافی</label>
+            <select className='form-select w-50 mt-4 text-center fs-4'>
                 {paymentTypes && paymentTypes.map((element, index) => {
-                    return <option value={element.value} key={index}>{element.title}</option>
+                    return <option value={element.value} key={index} className="fs-4">{element.title}</option>
                 })}
             </select>
         </div>

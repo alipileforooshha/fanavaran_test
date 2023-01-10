@@ -207,10 +207,10 @@ function CoverenceForm() {
       </button>
       {inputs.map((value,index)=>{
         return <div key={index}>
-          <label>{value.label}</label>
-          <select type={value.type} name={value.name} value={value.value} className="form-select" onChange={value.onchange} disabled={value.disable}>
+          <label className='fs-3 my-3'>{value.label}</label>
+          <select type={value.type} name={value.name} value={value.value} className="form-select fs-4" onChange={value.onchange} disabled={value.disable}>
             {value.options.map((option,index) => {
-              return <option value={option.value} key={index}>
+              return <option value={option.value} key={index} className="fs-4">
                 {option.title}
               </option>
             })}
