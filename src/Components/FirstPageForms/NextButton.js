@@ -59,14 +59,26 @@ function NextButton() {
   }
     
     const checkRelativeCondition = () => {
+      if(state.relativity == 0){
+        Swal.fire('نسبت با متقاضی نمیتواند خالی باشد');
+        return 0;
+      }
       return 1
     }
     
     const checkJobCondition = () => {
+      if(state.first_job == 0){
+        Swal.fire('شغل معتبر نیست');
+        return 0;
+      }
       return 1
     }
     
     const checkAgeCondition = () => {
+      if(state.birth_day == '' || state.birth_month == '' || state.birth_year =='' || isNaN(state.birth_day) || isNaN(state.birth_month) || isNaN(state.birth_year)){
+        Swal.fire('لطفا سن را کامل مشخص کنید');
+        return 0;
+      }
       const date = new DateObject({ calendar: persian, locale: persian_fa })
 
       var age = date.year - state.birth_year;
@@ -92,19 +104,29 @@ function NextButton() {
     }
     
     const checkInsuranceLengthCondition = () => {
+      if(state.insurance_length == '' || isNaN(state.insurance_length)){
+        Swal.fire('مدت بیمه نامه را مشخص کنید');
+        return 0;
+      }
     return 1
   }
 
   const checkPaymentMethodCondition = () => {
+    if(state.payment_method == 0){
+      Swal.fire('نحوه پرداخت را مشخص کنید')
+      return 0;
+    }
     return 1
   }
 
   const checkFirstPaymentCondition = () => {
     if((state.payment_method == 0 || state.payment_method == 1 || state.payment_method == 2) && state.first_payment < 400000){
       Swal.fire('پرداختی سال اول باید بالای 400 هزار تومان باشد');
+      return 0;
     } 
     else if(state.payment_method == 3 && state.first_payment < 600000){
       Swal.fire('پرداختی سال اول باید بالای 600 هزار تومان باشد');
+      return 0;
     }else{
       postData();
     }
@@ -114,7 +136,7 @@ function NextButton() {
   return (
     <div>
         <button className='btn btn-primary mt-3 w-50' onClick={() => {
-            if(checkCondition()){
+            if(checkCondition() && state.step <= 6){
               setState({
                 ...state,
                 step : state.step + 1

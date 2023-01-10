@@ -5,10 +5,12 @@ function PreviousButton() {
     const {secondForm, setSecondForm} = useContext(SecondFormContext);
     
     const prev = () => {
-        setSecondForm({
-            ...secondForm,
-            second_step : secondForm.second_step - 1
-        });
+        if(secondForm.second_step > 1){
+            setSecondForm({
+                ...secondForm,
+                second_step : secondForm.second_step - 1
+            });
+        }
     }
 
     return (

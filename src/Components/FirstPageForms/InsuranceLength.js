@@ -5,7 +5,7 @@ const InsuranceLength = ({next, prev}) => {
     const {state,setState} = useContext(FormContext);
     const end = 70 - state.age>30 ? 30 : 70 - state.age;
     const length = [...Array(end - 5 + 1).keys()].map(x => x + 5);
-
+    length.unshift('مدت بیمه نامه')
     return (
     <div className='form-group m-4 d-flex flex-column w-50 m-auto d-inline mt-4'>
         <label>مدت بیمه نامه</label>

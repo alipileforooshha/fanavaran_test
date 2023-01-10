@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { FormContext } from '../../Contexts/FormContext';
 import { useForm } from 'react-hook-form';
 
-const RelativeForm = ({next}) => {
+const RelativeForm = () => {
 
   const {state,setState} = useContext(FormContext);
   

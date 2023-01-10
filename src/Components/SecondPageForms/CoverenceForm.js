@@ -17,15 +17,20 @@ function CoverenceForm() {
         if(e.target.value > 0){
           setShowForms(true)
           setSecondForm({...secondForm,
-            death_by_accident : e.target.value});
+            death_by_accident : e.target.value,
+            disability : 0,
+            medical_cost_by_accident : 0,
+            extra_dangers_package : 0,
+            hospitalization_cost : 0,
+          });
           }else if(e.target.value == 0){
             setShowForms(false)
             setSecondForm({...secondForm,
               death_by_accident : e.target.value,
-              disability : 0,
-              medical_cost_by_accident : 0,
-              extra_dangers_package : 0,
-              hospitalization_cost : 0,
+              disability : '',
+              medical_cost_by_accident : '',
+              extra_dangers_package : '',
+              hospitalization_cost : '',
               clearance_to_pay_insurance : 0,
               special_illness : 0});
           }
