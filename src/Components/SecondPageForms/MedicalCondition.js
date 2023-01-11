@@ -621,7 +621,8 @@ function MedicalCondition() {
                         return <div className='d-flex flex-column justify-content-between mt-3' key={index}>
                             <div className='d-flex justify-content-between mt-3'>
                                 <label className='text-nowrap mx-4'>{input.label}</label>
-                                <input name={input.name} 
+                                <input name={input.name}
+                                    style={input.error && {borderColor : "red", outline : "red", boxShadow : ""}}
                                     className='form-control'
                                     {...register(input.name)}
                                     value={input.value}
