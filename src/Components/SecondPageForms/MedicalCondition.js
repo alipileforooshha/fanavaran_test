@@ -710,7 +710,7 @@ function MedicalCondition({formDisable}) {
             {errors.self_illness_description && <p>{errors.self_illness_description.message}</p>}
             {errors.weight_change_description && <p>{errors.weight_change_description.message}</p>}
             
-            <NextButton />
+            {formDisable ? '' : <NextButton />}
         </form>
     </div>
         

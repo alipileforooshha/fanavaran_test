@@ -7,6 +7,8 @@ import { SecondFormContext } from '../Contexts/SecondFormContext'
 import NextButton from './SecondPageForms/NextButton'
 import PreviousButton from './SecondPageForms/PreviousButton'
 import MedicalCondition from './SecondPageForms/MedicalCondition'
+import MedicalConfirm from './SecondPageForms/MedicalConfirm'
+import ComplementInfo from './SecondPageForms/ComplementInfo'
 function SecondForm() {
   const {state,setState} = useContext(FormContext);
   const [secondForm,setSecondForm] = useState({
@@ -44,21 +46,21 @@ function SecondForm() {
     if(secondForm.second_step == 3){
       return <div>
         <div className='text-center col'>
-          <MedicalCondition formDisable={true} />
+          <MedicalConfirm />
         </div>
       </div>
     }
     if(secondForm.second_step == 4){
       return <div>
         <div className='text-center col'>
-          <h3>fourth page</h3>
+          <ComplementInfo />
         </div>
       </div>
     }
   }
   return (
     <SecondFormContext.Provider value={{secondForm,setSecondForm}}>
-      <div className='row'>
+      <div className='row mt-3'>
         {formBuiler()}
       </div>
       <div className='d-flex justify-content-around w-100'>

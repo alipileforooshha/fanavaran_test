@@ -12,15 +12,15 @@ function App() {
   const[state,setState] = useState({
     step : 1,
     relativity : 0,
-    first_job : '',
+    first_job : 2,
     second_job : '',
-    job_name : '',
-    birth_day : '',
-    birth_month : '',
-    birth_year : '',
+    job_name : 'مهندس',
+    birth_day : 1,
+    birth_month : 2,
+    birth_year : 1378,
     age : 2,
-    insurance_length : '',
-    payment_method : 0,
+    insurance_length : 23,
+    payment_method : 1,
     first_payment : 1000000,
   });
   return (
