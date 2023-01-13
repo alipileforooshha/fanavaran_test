@@ -44,7 +44,7 @@ function SecondForm() {
     if(secondForm.second_step == 3){
       return <div>
         <div className='text-center col'>
-          <h3>third page</h3>
+          <MedicalCondition formDisable={true} />
         </div>
       </div>
     }

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import NextButton from './NextButton';
 import e from 'react-date-object/calendars/persian';
 
-function MedicalCondition() {
+function MedicalCondition({formDisable}) {
     const [state, setState] = useState({
         mother_alive : 1,
         father_alive : 1,
@@ -22,7 +22,7 @@ function MedicalCondition() {
         ssn : yup.number().typeError('کد ملی باید عددی باشد').
         test('len', 'باید بین 5 تا 10 حرف باشد', val => val.toString().length >= 5 && val.toString().length <= 10)
         .required('باید حتما پر شده باشد'),
-        birth_date : yup.string().required('باید حتما پر شده باشد'),
+        birth_date : yup.number().required('باید حتما پر شده باشد'),
         mobile : yup.number('مقدار باید عددی باشد').typeError('موبایل باید عددی باشد').required('باید حتما پر شده باشد'),
         height : yup.number('مقدار باید عددی باشد').typeError('قد باید عددی باشد').required('باید حتما پر شده باشد'),
         weight : yup.number('مقدار باید عددی باشد').typeError('وزن ملی باید عددی باشد').required('باید حتما پر شده باشد'),
@@ -94,14 +94,28 @@ function MedicalCondition() {
             name : "ssn",
             placeholder : "لطفا کد ملی 10 رقمی را وارد نمایید",
             value : secondForm.national_code,
-            error : errors.ssn && errors.ssn.message
+            error : errors.ssn && errors.ssn.message,
+            disable : formDisable,
+            onchange : (e) => {
+                setSecondForm({
+                    ...secondForm,
+                    ssn : e.target.value
+                })
+            }
         },
         {
             type : "input",
             name : 'birth_date',
             label : "تاریخ تولد بیمه شده",
-            value : secondForm.birth_year,
-            error : errors.birth_date && errors.birth_date.message
+            value : secondForm.birth_date,
+            error : errors.birth_date && errors.birth_date.message,
+            disable : formDisable,
+            onchange : (e) => {
+                setSecondForm({
+                    ...secondForm,
+                    birth_date : e.target.value
+                })
+            }
         },
         {
             type : "input",
@@ -109,7 +123,14 @@ function MedicalCondition() {
             label : "شماره موبایل بیمه شده",
             placeholder : "09128813755",
             value : secondForm.mobile_number,
-            error : errors.mobile && errors.mobile.message
+            error : errors.mobile && errors.mobile.message,
+            disable : formDisable,
+            onchange : (e) => {
+                setSecondForm({
+                    ...secondForm,
+                    mobile : e.target.value
+                })
+            }
         },
         {
             type : "input",
@@ -117,7 +138,14 @@ function MedicalCondition() {
             label : "قد بیمه شده",
             placeholder : "",
             value : secondForm.height,
-            error : errors.height && errors.height.message
+            error : errors.height && errors.height.message,
+            disable : formDisable,
+            onchange : (e) => {
+                setSecondForm({
+                    ...secondForm,
+                    height : e.target.value
+                })
+            }
         },
         {
             type : "input",
@@ -125,7 +153,14 @@ function MedicalCondition() {
             label : "وزن بیمه شده",
             placeholder : "",
             value : secondForm.weight,
-            error : errors.weight && errors.weight.message
+            error : errors.weight && errors.weight.message,
+            disable : formDisable,
+            onchange : (e) => {
+                setSecondForm({
+                    ...secondForm,
+                    weight : e.target.value
+                })
+            }
         },
         {
             type : "select",
@@ -134,6 +169,7 @@ function MedicalCondition() {
             placeholder : "",
             value : secondForm.gender,
             error : errors.gender && errors.gender.message,
+            disable : formDisable,
             onchange : (e) => {
                 console.log(typeof e.target.value)
                 setSecondForm({
@@ -158,6 +194,7 @@ function MedicalCondition() {
             placeholder : "",
             name : "military",
             error : errors.military && errors.military.message,
+            disable : formDisable,
             value : secondForm.military_status,
             options : [
                 {
@@ -201,7 +238,7 @@ function MedicalCondition() {
             inputs : [
                 {
                     placeholder : "ماده/بند/سال معافیت",
-                    disable : state.military_medical,
+                    disable : !state.military_medical || formDisable,
                     name : "cancelation_detail",
                     value : secondForm.cancelation_detail,
                     onchange : (e) => {
@@ -214,7 +251,7 @@ function MedicalCondition() {
                 },
                 {
                     placeholder : "علت معافیت",
-                    disable : state.military_medical,
+                    disable : !state.military_medical || formDisable,
                     name : "cancelation_reason",
                     value : secondForm.cancelation_reason,
                     onchange : (e) => {
@@ -234,6 +271,7 @@ function MedicalCondition() {
             name : 'father_status',
             error : errors.father_status && errors.father_status.message,
             value : state.father_death,
+            disable : formDisable,
             onchange : (e) => {
                 setSecondForm({
                     ...secondForm,
@@ -264,7 +302,7 @@ function MedicalCondition() {
             inputs : [
                 {
                     placeholder : "سن فعلی",
-                    disable : state.father_alive,
+                    disable : !state.father_alive || formDisable,
                     value : secondForm.father_age,
                     name : "father_age",
                     onchange : (e) => {
@@ -277,7 +315,7 @@ function MedicalCondition() {
                 },
                 {
                     placeholder : "علت فوت",
-                    disable : !state.father_alive,
+                    disable : state.father_alive || formDisable,
                     value : secondForm.father_death_reason,
                     name : "father_death_reason",
                     onchange : (e) => {
@@ -295,6 +333,7 @@ function MedicalCondition() {
             placeholder : "",
             name : 'mother_status',
             value : state.mother_death,
+            disable : formDisable,
             error : errors.mother_status && errors.mother_status.message,
             onchange : (e) => {
                 setSecondForm({
@@ -326,7 +365,7 @@ function MedicalCondition() {
             inputs : [
                 {
                     placeholder : "سن فعلی",
-                    disable : state.mother_alive,
+                    disable : !state.mother_alive || formDisable,
                     value : secondForm.mother_age,
                     name : "mother_age",
                     onchange : (e) => {
@@ -339,7 +378,7 @@ function MedicalCondition() {
                 },
                 {
                     placeholder : "علت فوت",
-                    disable : !state.mother_alive,
+                    disable : state.mother_alive || formDisable,
                     value : secondForm.mother_death_reason,
                     name : "mother_death_reason",
                     onchange : (e) => {
@@ -358,6 +397,7 @@ function MedicalCondition() {
             placeholder : "",
             value : secondForm.family_health,
             name : "family_health",
+            disable : formDisable,
             error : errors.family_health && errors.family_health.message,
             onchange : (e) =>{
                 setSecondForm({
@@ -400,7 +440,7 @@ function MedicalCondition() {
                 })
             },
             value : secondForm.family_illness_description,
-            disable : state.family_health
+            disable : state.family_health || formDisable
         },
         {
             type : "select",
@@ -408,6 +448,7 @@ function MedicalCondition() {
             placeholder : "",
             value : secondForm.smoking,
             name : "smoking",
+            disable : formDisable,
             error : errors.smoking && errors.smoking.message,
             onchange : (e) => {
                 setSecondForm({
@@ -433,6 +474,7 @@ function MedicalCondition() {
             name : "hospitalization",
             value : secondForm.hospitalization,
             error : errors.hospitalization && errors.hospitalization.message,
+            disable : formDisable,
             onchange : (e) =>{
                 setSecondForm({
                     ...secondForm,
@@ -468,7 +510,7 @@ function MedicalCondition() {
             name : 'hospitalization_description',
             error : errors.hospitalization_description && errors.hospitalization_description.message,
             value : secondForm.hospitalization_description,
-            disable : !state.hospitalization
+            disable : !state.hospitalization || formDisable,
         },
         {
             type : "input",
@@ -482,13 +524,15 @@ function MedicalCondition() {
                     ...secondForm,
                     physical_record : e.target.value
                 })
-            }
+            },
+            disable : formDisable,
         },
         {
             type : "input",
             name : "daily_medicine_consume",
             label : "مصرف روزانه دارو",
             value : secondForm.daily_medicine_consume,
+            disable : formDisable,
             error : errors.daily_medicine_consume && errors.daily_medicine_consume.message,
             placeholder : "اگر به صورت مرتب و روزانه دارو مصرف میکنید لطفا نام آن را قید کنید",
             onchange : (e) => {
@@ -505,6 +549,7 @@ function MedicalCondition() {
             name : "current_physical_state",
             error : errors.current_physical_state && errors.current_physical_state.message,
             value : secondForm.full_health,
+            disable : formDisable,
             onchange : (e) =>{
                 if(e.target.value == 1){
                     setSecondForm({
@@ -546,7 +591,7 @@ function MedicalCondition() {
                 })
             },
             error : errors.self_illness_description && errors.self_illness_description.message,
-            disable : state.full_health
+            disable : state.full_health || formDisable
         },
         {
             type : "select",
@@ -555,6 +600,7 @@ function MedicalCondition() {
             name : "weight_change",
             value : secondForm.weight_change,
             error : errors.weight_change && errors.weight_change.message,
+            disable : formDisable,
             onchange : (e) =>{
                 setSecondForm({
                     ...secondForm,
@@ -600,7 +646,7 @@ function MedicalCondition() {
             name : 'weight_change_description',
             error : errors.weight_change_description && errors.weight_change_description.message,
             value : secondForm.weight_description,
-            disable : !state.weight_change
+            disable : !state.weight_change || formDisable
         },
     ];
 
@@ -638,13 +684,13 @@ function MedicalCondition() {
                             <div className='d-flex justify-content-between mt-3'>
                                 <label className='text-nowrap mx-4'>{input.label}</label>
                                 <div className='w-100 d-flex justify-content-between'>
-                                    <select type="select" {...register(input.name)} name={input.name} className='form-select' value={input.value} placeholder={input.placeholder} onChange={input.onchange}>
+                                    <select type="select" {...register(input.name)} name={input.name} className='form-select' value={input.value} placeholder={input.placeholder} onChange={input.onchange} disabled={input.disable}>
                                         {input.options.map((option,index) => {
                                             return <option value={option.value} key={index}>{option.title}</option>
                                         })}
                                     </select>
                                     {input.inputs && input.inputs.map((second_input,index) => {
-                                        return <input name={second_input.name} {...register(second_input.name)} onChange={second_input.onchange} className='form-control mx-4 w-100' key={index} placeholder={second_input.placeholder} disabled={!second_input.disable}></input>
+                                        return <input name={second_input.name} {...register(second_input.name)} onChange={second_input.onchange} className='form-control mx-4 w-100' key={index} placeholder={second_input.placeholder} disabled={second_input.disable}></input>
                                     })}
                                 </div>
                                 <p className='text-danger'>{input.error}</p>
@@ -669,6 +715,10 @@ function MedicalCondition() {
     </div>
         
   )
+}
+
+MedicalCondition.defaultProps = {
+    formDisable : false
 }
 
 export default MedicalCondition
