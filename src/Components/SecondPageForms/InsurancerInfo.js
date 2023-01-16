@@ -28,8 +28,8 @@ function InsurancerInfo() {
     ];
 
     return (
-        <div>
-            <h4>مشخصات بیمه گذار</h4>
+        <div className='my-4'>
+            <h4 className='d-flex justify-content-start'>مشخصات بیمه گذار</h4>
             <div className='d-flex flex-wrap justify-content-center'>
                 {datas.map((input) => {
                     return(

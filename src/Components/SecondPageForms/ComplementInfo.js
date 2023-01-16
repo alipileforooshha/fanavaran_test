@@ -11,6 +11,7 @@ function ComplementInfo() {
         <div className='row'>
             <ComplementInfoRight />
             <ComplementInfoLeft />
+            <ComplementInfoBottom />
         </div>
     )
 }
