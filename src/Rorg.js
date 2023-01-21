@@ -52,7 +52,7 @@ function Rorg() {
     };
   
     return (
-        <div className="App" id="initechOrgChart">
+        <div className="App mb-4" id="initechOrgChart">
             {/* <OrgChart tree={state} NodeComponent={MyNodeComponent} /> */}
             {state ? <OrgChart tree={state} NodeComponent={MyNodeComponent} /> : ""}
         </div>
@@ -63,20 +63,32 @@ const MyNodeComponent = ({node}) => {
     const [state,setState] = useState(false);
     
     return (
-        <div className="initechNode card" onMouseEnter={() => {
-            setState(true)
-        }}
-        onMouseLeave={() => {
-            setState(false)
-        }}>{ node.name }
-            <div class="card-body">
-                <h4 class="card-title">{node.Role}</h4>
-                <p class="card-text">{node.name}</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+        <div className='d-flex flex-row justify-content-center align-items-center'>
+            <div className="initechNode card rounded" onMouseEnter={() => {
+                setState(true)
+            }}
+            onMouseLeave={() => {
+                setState(false)
+            }}>{ node.name }
+                <div class="card-body">
+                    <h4 class="card-title">{node.Role}</h4>
+                    <p class="card-text">{node.name}</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
             </div>
             {state ? 
-            <p class="card-text">{node.children?.length}</p> 
+            <div class="card-text m-2 p-2 border border-danger rounded">
+                <div>
+                    <span>تعداد زیر مجموعه ها : </span>
+                    <span>{node.children?.length}</span>
+                </div>
+                <div>
+                    <span>آدرس : </span>
+                    <span>{node.Address}</span>
+                </div>
+            </div> 
             : ""}
+
         </div>
     );
 };
