@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {PropTypes} from 'prop-types';
 import axios from 'axios';
+import { async } from 'q';
 
 function Login({setToken}) {
     
@@ -9,8 +10,11 @@ function Login({setToken}) {
         password : ''
     });
 
-    const postData = () => {
-        return axios.post('http://127.0.0.1/api/login',{
+    
+    
+
+    const postData = async () => {
+        return await axios.post('http://127.0.0.1:8000/api/login',{
             username : state.username,
             password : state.password
         }).then( res => {
@@ -19,7 +23,8 @@ function Login({setToken}) {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         postData();
     }
     return (
@@ -54,7 +59,7 @@ function Login({setToken}) {
     )
 }
 
-Login.PropTypes = {
+Login.propTypes = {
     setToken : PropTypes.func.isRequired
 }
 

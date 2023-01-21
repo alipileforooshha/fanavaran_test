@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Dashboard from './Components/Dashboard';
 import Preferences from './Components/Preferences';
 import Login from './Components/Login';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   
