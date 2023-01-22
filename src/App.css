@@ -14,7 +14,19 @@
   border-top: solid 1px red;
 }
 
-.sticky{
-  position: sticky;
+.chartClass{
+  color: blueviolet !important;
+  /* background-color: aqua; */
+  border: none !important;
+  outline: none !important;
+  background-image: none !important;
+  /* font-size: 50px; */
+}
+.containerClass{
+  color: blueviolet !important;
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  background-image: none !important;
 }
 

@@ -37,9 +37,9 @@ function App() {
     <div>
       {/* <ChartContainer datasource={ds} /> */}
       {/* <HierarchyTree /> */}
-      {/* <Dabeng pan={true} containerClass="bg-danger" chartClass="bg-danger"/> */}
+      <Dabeng pan={true} containerClass="bg-danger" chartClass="bg-danger"/>
       {/* <Scttcper /> */}
-      <Rorg />
+      {/* <Rorg /> */}
     </div>
   );
 }
