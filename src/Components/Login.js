@@ -18,7 +18,7 @@ function Login({setToken}) {
             username : state.username,
             password : state.password
         }).then( res => {
-            console.log(res.data);
+            setToken(res.data)
             return res.data;
         })
     }

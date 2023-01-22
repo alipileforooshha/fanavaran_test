@@ -6,19 +6,36 @@ import Preferences from './Components/Preferences';
 import Login from './Components/Login';
 import { useEffect, useState } from 'react';
 
+const setToken = (token) => {
+  sessionStorage.setItem('token',token)
+}
+
+const getToken = () => {
+  return sessionStorage.getItem('token')
+}
 function App() {
   
-  const [token, setToken] = useState();
+  const token = getToken();
 
-  return (
-    <Router>
-      <Routes>
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/prefences' element={<Preferences />} />
-        <Route path='/login' element={<Login setToken={setToken}/>} />
-      </Routes>
-    </Router>
-  );
+  if(token){
+    return (
+      <Router>
+        <Routes>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/prefences' element={<Preferences />} />
+        </Routes>
+      </Router>
+    )
+  }else{
+    return (
+      <Router>
+        <Routes>
+          <Route path='/login' element={<Login setToken={setToken}/>} />
+        </Routes>
+      </Router>
+    );
+  }
+    
 }
 
 export default App;
