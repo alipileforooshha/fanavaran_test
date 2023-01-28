@@ -5,6 +5,7 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios from 'axios';
 import Input from './Input';
+import { Navigate, useNavigate } from 'react-router';
 function Register({setToken}) {
     const [state, setState] = useState({
         ssn : null,
@@ -29,6 +30,7 @@ function Register({setToken}) {
         reValidateMode : 'onChange',
         mode : 'onChange'
     });
+    const navigate = useNavigate();
 
     const inputs = [
         {
@@ -130,17 +132,19 @@ function Register({setToken}) {
             }
         },
     ]
-    const postData = () => {
-        axios.post('http://127.0.0.1:8000/api/register',{
+    const postData = async () => {
+        await axios.post('http://127.0.0.1:8000/api/register',{
             ...state
         }).then(res => {
-            console.log(res)
-            setToken(res.data.user.token)
+            sessionStorage.setItem('token',res.data.user.token)
+            navigate('/dashboard');            
+        }).catch(res => {
+            return 0;
         })
     };
-
+    
     const submitForm = () => {
-        postData();
+        postData()
     };
 
     return (
@@ -148,7 +152,7 @@ function Register({setToken}) {
             <h2 className='text-primary'>Login Form</h2>
             <form className='d-flex flex-column justify-content-center flex-shrink' onSubmit={handleSubmit(submitForm)}>
                 {inputs.map((input, index) => {
-                    return <Input label={input.label} name={input.name} value={input.value} placeholder={input.placeholder} error={input.error} onchange={input.onchange} index={index} register={register} required={input.required}/>
+                    return <Input key={index} label={input.label} name={input.name} value={input.value} placeholder={input.placeholder} error={input.error} onchange={input.onchange} index={index} register={register} required={input.required}/>
                 })}
                 <div className='form-group'>
                     <button type='submit' className='btn btn-primary mt-2'>
