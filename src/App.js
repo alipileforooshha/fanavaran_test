@@ -5,9 +5,11 @@ import Dashboard from './Components/Dashboard';
 import Preferences from './Components/Preferences';
 import Login from './Components/Login';
 import { useEffect, useState } from 'react';
+import Register from './Components/Register';
 
 const setToken = (token) => {
-  sessionStorage.setItem('token',token)
+  sessionStorage.setItem('token',token);
+  console.log(token);
 }
 
 const getToken = () => {
@@ -31,7 +33,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/login' element={<Login setToken={setToken}/>} />
-          <Route path='/register' element={<Login setToken={setToken}/>} />
+          <Route path='/register' element={<Register setToken={setToken}/>} />
         </Routes>
       </Router>
     );
