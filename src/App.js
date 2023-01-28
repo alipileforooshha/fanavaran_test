@@ -31,6 +31,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/login' element={<Login setToken={setToken}/>} />
+          <Route path='/register' element={<Login setToken={setToken}/>} />
         </Routes>
       </Router>
     );
