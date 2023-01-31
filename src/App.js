@@ -9,6 +9,7 @@ import Register from './Components/Register';
 import { async } from 'q';
 import PrivateRoute from './Utils/PrivateRoute';
 import CompleteInfo from './Components/CompleteInfo';
+import Navbar from './Components/Navbar';
 
 
 
@@ -16,6 +17,7 @@ function App() {
     
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route element={<PrivateRoute/>}>
           <Route path='/' element={<App />} />
