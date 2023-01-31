@@ -4,7 +4,7 @@ import { Navigate, Outlet, Route } from 'react-router-dom'
 
 function PrivateRoute() {
     const getToken = () => {
-        return sessionStorage.getItem('token')
+        return localStorage.getItem('token')
     }
 
     const token = getToken();

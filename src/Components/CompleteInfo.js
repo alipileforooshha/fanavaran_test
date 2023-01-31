@@ -1,22 +1,16 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import Input from './Input';
 import { useForm } from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios from 'axios';
-import Input from './Input';
-import { Navigate, useNavigate } from 'react-router';
-function Register({setToken}) {
-    const [state, setState] = useState({
-        ssn : null,
-        mobile : null,
-        password : null,
-        birth_date : null,
-        address : null,
-        postal_code : null,
-        home_number : null,
-    });
-    
+
+
+function CompleteInfo() {
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const [state, setState] = useState({});
+
     const validationSchema = yup.object().shape({
         ssn : yup.number().typeError('کد ملی باید عددی باشد').test('len', 'باید بین 5 تا 10 حرف باشد', val => val.toString().length >= 5 && val.toString().length <= 10)
         .required('باید حتما پر شده باشد'),
@@ -30,16 +24,16 @@ function Register({setToken}) {
         reValidateMode : 'onChange',
         mode : 'onChange'
     });
-    const navigate = useNavigate();
 
     const inputs = [
         {
             label : "کد ملی",
             name : 'ssn',
-            value : state.ssn,
+            value : user?.ssn,
             placeholder : "لطفا کد ملی 10 رقمی را وارد نمایید",
             error : errors.ssn && errors.ssn.message,
             required : true,
+            show : false,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -50,10 +44,11 @@ function Register({setToken}) {
         {
             label : "موبایل",
             name : 'mobile',
-            value : state.mobile,
+            value : user?.mobile,
             placeholder : "لطفا شماره موبایل خود را وارد نمایید",
             error : errors.mobile && errors.mobile.message,
             required : true,
+            show : false,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -64,10 +59,11 @@ function Register({setToken}) {
         {
             label : "پسورد",
             name : 'password',
-            value : state.password,
+            value : user?.password,
             placeholder : "لطفا رمز عبور خود را وارد نمایید",
             required : true,
             error : errors.password && errors.password.message,
+            show : false,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -78,10 +74,11 @@ function Register({setToken}) {
         {
             label : "تاریخ تولد",
             name : 'birth_date',
-            value : state.birth_date,
+            value : user?.birth_date,
             placeholder : "لطفا رمز عبور خود را وارد نمایید",
             required : false,
             error : errors.birth_date && errors.birth_date.message,
+            show : user?.birth_date? false : true,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -92,10 +89,11 @@ function Register({setToken}) {
         {
             label : "آدرس",
             name : 'address',
-            value : state.address,
+            value : user?.address,
             placeholder : "لطفا رمز عبور خود را وارد نمایید",
             required : false,
             error : errors.address && errors.address.message,
+            show : user?.address? false : true,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -106,10 +104,11 @@ function Register({setToken}) {
         {
             label : "کد پستی",
             name : 'postal_code',
-            value : state.postal_code,
+            value : user?.postal_code,
             placeholder : "لطفا کد پستی خود را وارد نمایید",
             required : false,
             error : errors.postal_code && errors.postal_code.message,
+            show : user?.postal_code? false : true,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -120,10 +119,11 @@ function Register({setToken}) {
         {
             label : "تلفن ثابت",
             name : 'home_number',
-            value : state.home_number,
+            value : user?.home_number,
             placeholder : "لطفا رمز عبور خود را وارد نمایید",
             required : false,
             error : errors.home_number && errors.home_number.message,
+            show : user?.home_number? false : true,
             onchange : (e) => {
                 setState({
                     ...state,
@@ -132,13 +132,14 @@ function Register({setToken}) {
             }
         },
     ]
+
     const postData = async () => {
-        await axios.post('http://127.0.0.1:8000/api/register',{
+        await axios.post('http://127.0.0.1:8000/api/rsegister',{
             ...state
         }).then(res => {
             localStorage.setItem('user',JSON.stringify(res.data.user))
             localStorage.setItem('token',res.data.user.token)
-            navigate('/dashboard');            
+            // navigate('/dashboard');            
         }).catch(res => {
             return 0;
         })
@@ -149,11 +150,12 @@ function Register({setToken}) {
     };
 
     return (
-        <div className='d-flex flex-column justify-content-center'>
-            <h2 className='text-primary'>Login Form</h2>
+        <div>
+            <div className='d-flex flex-column justify-content-center'>
+            <h2 className='text-primary'>تکمیل اطلاعات</h2>
             <form className='d-flex flex-column justify-content-center flex-shrink' onSubmit={handleSubmit(submitForm)}>
                 {inputs.map((input, index) => {
-                    return <Input key={index} label={input.label} name={input.name} value={input.value} placeholder={input.placeholder} error={input.error} onchange={input.onchange} index={index} register={register} required={input.required}/>
+                    return input.show ? <Input key={index} label={input.label} name={input.name} value={input.value} placeholder={input.placeholder} error={input.error} onchange={input.onchange} index={index} register={register} required={input.required}/> : ""
                 })}
                 <div className='form-group'>
                     <button type='submit' className='btn btn-primary mt-2'>
@@ -162,7 +164,8 @@ function Register({setToken}) {
                 </div>
             </form>
         </div>
+        </div>
     )
 }
 
-export default Register
+export default CompleteInfo
