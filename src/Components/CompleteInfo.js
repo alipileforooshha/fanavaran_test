@@ -8,15 +8,11 @@ import axios from 'axios';
 
 function CompleteInfo() {
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const [user, setUser] = useState({...JSON.parse(localStorage.getItem('user'))});
     const [state, setState] = useState({});
 
     const validationSchema = yup.object().shape({
-        ssn : yup.number().typeError('کد ملی باید عددی باشد').test('len', 'باید بین 5 تا 10 حرف باشد', val => val.toString().length >= 5 && val.toString().length <= 10)
-        .required('باید حتما پر شده باشد'),
-        mobile : yup.number().typeError('موبایل باید عددی باشد').test('len','موبایل باید دقیقا 10 حرف باشد', val => val.toString().length === 10).
-        required('فیلد موبایل باید پر شده باشد'),
-        password : yup.string().test('len', 'رمز عبور باید بین 8 تا 15 حرف باشد', val => val.toString().length >= 4 && val.toString().length <= 15).required()
+        
     });
 
     const {register, handleSubmit, formState:{errors}, watch, unregister} = useForm({
@@ -78,11 +74,13 @@ function CompleteInfo() {
             placeholder : "لطفا رمز عبور خود را وارد نمایید",
             required : false,
             error : errors.birth_date && errors.birth_date.message,
-            show : user?.birth_date? false : true,
+            show : user?.birth_year && user?.birth_month && user?.birth_day ? false : true,
             onchange : (e) => {
                 setState({
                     ...state,
-                    birth_date : e.target.value
+                    birth_year : e.year,
+                    birth_month : e.month.number,
+                    birth_day : e.day
                 })
             }
         },
@@ -134,11 +132,16 @@ function CompleteInfo() {
     ]
 
     const postData = async () => {
-        await axios.post('http://127.0.0.1:8000/api/rsegister',{
+        console.log('data',state)
+        await axios.post(`http://127.0.0.1:8000/api/completeInfo/${user.id}`,{
             ...state
         }).then(res => {
-            localStorage.setItem('user',JSON.stringify(res.data.user))
-            localStorage.setItem('token',res.data.user.token)
+            console.log('data',res.data);
+            localStorage.setItem('user',JSON.stringify(res.data))
+            // localStorage.setItem('token',res.data.user.token)
+            setUser({
+                ...res.data
+            });
             // navigate('/dashboard');            
         }).catch(res => {
             return 0;
@@ -150,10 +153,10 @@ function CompleteInfo() {
     };
 
     return (
-        <div>
+        <div className='p-4'>
             <div className='d-flex flex-column justify-content-center'>
             <h2 className='text-primary'>تکمیل اطلاعات</h2>
-            <form className='d-flex flex-column justify-content-center flex-shrink' onSubmit={handleSubmit(submitForm)}>
+            <form className='d-flex flex-column justify-content-center flex-shrin' onSubmit={handleSubmit(submitForm)}>
                 {inputs.map((input, index) => {
                     return input.show ? <Input key={index} label={input.label} name={input.name} value={input.value} placeholder={input.placeholder} error={input.error} onchange={input.onchange} index={index} register={register} required={input.required}/> : ""
                 })}

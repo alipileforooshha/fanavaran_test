@@ -11,7 +11,9 @@ function Register({setToken}) {
         ssn : null,
         mobile : null,
         password : null,
-        birth_date : null,
+        birth_year : null,
+        birth_month : null,
+        birth_day : null,
         address : null,
         postal_code : null,
         home_number : null,
@@ -85,7 +87,9 @@ function Register({setToken}) {
             onchange : (e) => {
                 setState({
                     ...state,
-                    birth_date : e.target.value
+                    birth_year : e.year,
+                    birth_month : e.month.number,
+                    birth_day : e.day
                 })
             }
         },
@@ -133,9 +137,11 @@ function Register({setToken}) {
         },
     ]
     const postData = async () => {
+        console.log(state);
         await axios.post('http://127.0.0.1:8000/api/register',{
             ...state
         }).then(res => {
+            console.log(res)
             localStorage.setItem('user',JSON.stringify(res.data.user))
             localStorage.setItem('token',res.data.user.token)
             navigate('/dashboard');            
